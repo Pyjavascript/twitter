@@ -91,7 +91,6 @@ function TweetBox() {
             type="text"
             placeholder="What is happening?!"
             onChange={(e) => SetPost(e.target.value)}
-            required
             value={post}
           />
         </div>
