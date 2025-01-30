@@ -1,0 +1,17 @@
+.posts::-webkit-scrollbar{
+  display: none;
+}
+body, html {
+  overflow: hidden;
+}
+.here::-webkit-scrollbar{
+  display: none !important;
+}
+.pop{
+  backdrop-filter: brightness(80%);
+  -webkit-backdrop-filter: brightness(80%);
+}
+.pop2{
+  backdrop-filter: brightness(60%);
+  -webkit-backdrop-filter: brightness(60%);
+}
