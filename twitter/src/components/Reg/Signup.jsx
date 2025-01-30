@@ -22,7 +22,7 @@ function signup() {
         password: password,
       };
       console.log("Data being sent to backend:", user);
-      fetch("http://localhost:5000/register", {
+      fetch("https://twitter-jfq3.onrender.com/register", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -51,7 +51,7 @@ function signup() {
     console.log("Google User Data:", user); // Check the response
 
     // Sending the Google user data to the backend
-    fetch("http://localhost:5000/register", {
+    fetch("https://twitter-jfq3.onrender.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

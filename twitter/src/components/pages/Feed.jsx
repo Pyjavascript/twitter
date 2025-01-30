@@ -4,7 +4,7 @@ import TweetBox from '../Home/DataHome/TweetBox';
 function Feed() {
   const [post,SetPost] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5000/post')
+    fetch('https://twitter-jfq3.onrender.com/post')
     .then(res => res.json())
     .then(data => {
       console.log(data);

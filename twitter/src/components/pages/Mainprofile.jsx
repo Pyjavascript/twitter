@@ -15,7 +15,7 @@ function Mainprofile({ user }) {
   const [post, Setpost] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/userpost?email=${user?.email}`)
+    fetch(`https://twitter-jfq3.onrender.com/userpost?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -43,7 +43,7 @@ function Mainprofile({ user }) {
         };
         Setisloading(false);
         if (url) {
-          fetch(`http://localhost:5000/userupdate/${user?.email}`, {
+          fetch(`https://twitter-jfq3.onrender.com/userupdate/${user?.email}`, {
             method: "PATCH",
             headers: {
               "content-type": "application/json",

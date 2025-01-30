@@ -6,7 +6,7 @@ function useLoggedinuser() {
   const email = user?.email;
   const [loggedinuser,Setloggedinuser] = useState({})
   useEffect(() => {
-    fetch(`http://localhost:5000/loggedinuser?email=${email}`)
+    fetch(`https://twitter-jfq3.onrender.com/loggedinuser?email=${email}`)
     .then((res) => res.json())
     .then(data => {
         Setloggedinuser(data)
