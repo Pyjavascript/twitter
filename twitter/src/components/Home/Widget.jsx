@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { TwitterTimelineEmbed } from "react-twitter-embed";
+// import { TwitterTimelineEmbed } from "react-twitter-embed";
 
 function Widget() {
-  const [searchQuery, setSearchQuery] = useState("Valorant"); // Default search
+  // const [searchQuery, setSearchQuery] = useState("Valorant"); // Default search
 
   // Handle input change and replace spaces with underscores
-  const handleSearchChange = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query.replace(/\s+/g, "_")); // Replace spaces with underscores
-  };
+  // const handleSearchChange = (e) => {
+  //   const query = e.target.value;
+  //   setSearchQuery(query.replace(/\s+/g, "_")); // Replace spaces with underscores
+  // };
 
   return (
     <div className="h-screen pt-2 p-3 flex flex-col gap-5 overflow-hidden border-l-[1px]">
       {/* Search Bar */}
-      <div className="flex gap-2 justify-center items-center bg-slate-100 p-2 py-2 rounded-full pl-4">
+      {/* <div className="flex gap-2 justify-center items-center bg-slate-100 p-2 py-2 rounded-full pl-4">
         <div className="flex justify-center items-center text-2xl">
           <ion-icon name="search-outline"></ion-icon>
         </div>
@@ -27,7 +27,7 @@ function Widget() {
       </div>
 
       {/* Twitter Timeline Embed based on search */}
-      <div className="flex flex-col gap-1 pl-2 overflow-hidden">
+      {/* <div className="flex flex-col gap-1 pl-2 overflow-hidden">
         <h2 className="font-extrabold text-2xl">Search Results for "{searchQuery.replace(/_/g, " ")}"</h2>
 
         <div className="overflow-hidden">
@@ -38,7 +38,7 @@ function Widget() {
             options={{ height: 510, width: 340 }}
           />
         </div>
-      </div>
+      </div> */} 
     </div>
   );
 }
