@@ -29,7 +29,7 @@ function Sidebar({ handlelogout, user }) {
   };
 
   const result = user?.email?.split("@");
-  const profileImage = user?.photoURL || user?.profileImage || "/default-avatar.png";
+  const profileImage = user?.photoURL || user?.profileImage || "/avatar.png";
 
     
 
