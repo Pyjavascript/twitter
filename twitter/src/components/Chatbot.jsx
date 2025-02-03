@@ -79,7 +79,7 @@ function Chatbot() {
 //   const fetchTweets = async () => {
 //     try {
 //       const response = await fetch(
-//         `http://localhost:5000/search-tweets?q=${searchQuery}`
+//         `http://localhost:3000/search-tweets?q=${searchQuery}`
 //       );
 //       const data = await response.json();
 //       setTweets(data?.data || []); // Set tweets to an empty array if no data is returned

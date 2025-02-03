@@ -43,7 +43,7 @@ function Mainprofile({ user }) {
         };
         Setisloading(false);
         if (url) {
-          fetch(`http://localhost:5000/userupdate/${user?.email}`, {
+          fetch(`http://localhost:3000/userupdate/${user?.email}`, {
             method: "PATCH",
             headers: {
               "content-type": "application/json",

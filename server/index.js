@@ -6,7 +6,7 @@ require('dotenv').config();
 const uri = process.env.MONGO_URI;
 const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
 
-const PORT = 5000;
+const PORT = 3000;
 const app = express();
 
 app.use(
