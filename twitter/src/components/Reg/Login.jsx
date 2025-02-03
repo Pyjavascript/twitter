@@ -33,7 +33,7 @@ function Login() {
   return (
     <div className="h-screen w-screen flex">
       <div className="h-screen hidden md:flex md:w-1/2 bg-sky-500">
-        <img src="src/assets/imgs/login.png" className="h-[100%]" />
+        <img src="/login.png" className="h-[100%]" />
       </div>
       <div className="bg-white h-screen md:w-1/2">
         <div className="p-10 pb-0 flex flex-col gap-2">
@@ -91,7 +91,7 @@ function Login() {
                   onClick={handleGoogle}
                 >
                   <img
-                    src="src/assets/imgs/google.svg"
+                    src="/google.svg"
                     alt=""
                     className="h-[100%]"
                   />

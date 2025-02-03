@@ -3,7 +3,6 @@ import ImgIco from "./icons/imgIco";
 import axios from "axios";
 import { useUserAuth } from "../../../context/userauth";
 import useLoggedinuser from "../../../hooks/useLoggedinuser";
-import { Profiler } from "react";
 
 function TweetBox() {
   const [post, SetPost] = useState("");
@@ -37,7 +36,7 @@ function TweetBox() {
   const handletweet = (e) => {
     e.preventDefault();
     if (user?.providerData[0]?.providerId === "password") {
-      fetch(`https://twitter-jfq3.onrender.com/loggedinuser?email=${email}`)
+      fetch(`http://localhost:5000/loggedinuser?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           Setname(data[0].name);
@@ -58,7 +57,7 @@ function TweetBox() {
       }
       Setimgurl('')
       SetPost('')
-      fetch('https://twitter-jfq3.onrender.com/post',{
+      fetch('http://localhost:5000/post',{
         method:"POST",
         headers:{
           'content-type': 'application/json'

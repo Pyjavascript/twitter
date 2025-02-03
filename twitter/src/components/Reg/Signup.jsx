@@ -22,7 +22,7 @@ function signup() {
         password: password,
       };
       console.log("Data being sent to backend:", user);
-      fetch("https://twitter-jfq3.onrender.com/register", {
+      fetch("http://localhost:5000/register", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -51,7 +51,7 @@ function signup() {
     console.log("Google User Data:", user); // Check the response
 
     // Sending the Google user data to the backend
-    fetch("https://twitter-jfq3.onrender.com/register", {
+    fetch("http://localhost:5000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function signup() {
   return (
     <div className="h-screen w-screen flex">
       <div className="h-screen hidden md:flex md:w-1/2 bg-sky-500">
-        <img src="src/assets/imgs/login.png" className="h-[100%]" />
+        <img src="/login.png" className="h-[100%]" />
       </div>
       <div className="bg-white h-screen md:w-1/2">
         <div className="p-10 pb-0 flex flex-col gap-2">
@@ -135,7 +135,7 @@ function signup() {
                   onClick={handleGoogle}
                 >
                   <img
-                    src="src/assets/imgs/google.svg"
+                    src="/google.svg"
                     alt=""
                     className="h-[100%]"
                   />

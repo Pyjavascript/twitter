@@ -1,22 +1,25 @@
 const { MongoClient } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
+require('dotenv').config();
+const uri = process.env.MONGO_URI;
 
 const PORT = 5000;
 const app = express();
 
-app.use(
-  cors({
-    origin: 'https://twitter-task-nullclass.netlify.app', // Replace with your Netlify URL
-    methods: 'GET,POST,PUT,DELETE',
-    credentials: true, // If using cookies or authentication
-  })
-);
+// app.use(
+//   cors({
+//     origin: 'https://twitter-task-nullclass.netlify.app', // Replace with your Netlify URL
+//     methods: 'GET,POST,PUT,DELETE',
+//     credentials: true, // If using cookies or authentication
+//   })
+// );
+app.use(cors())
 
 app.use(express.json());
 
-const uri =
-  "mongodb+srv://admin:admin123@twitter.hyoyp.mongodb.net/?retryWrites=true&w=majority&appName=twitter";
+// const uri =
+//   "mongodb+srv://admin:admin123@twitter.hyoyp.mongodb.net/?retryWrites=true&w=majority&appName=twitter";
 
 const client = new MongoClient(uri);
 
