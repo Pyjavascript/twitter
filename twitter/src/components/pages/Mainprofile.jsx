@@ -60,52 +60,6 @@ function Mainprofile({ user }) {
         Setisloading(false);
       });
   };
-  // const data = [
-  //   {
-  //     id: 1,
-  //     name: "John Doe",
-  //     username: "@johndoe",
-  //     post: "Just enjoying a peaceful walk in the park. #Nature",
-  //     profilePhoto:
-  //       "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?crop=faces&fit=crop&w=50&h=50",
-  //     photo:
-  //       "https://images.unsplash.com/photo-1593642532973-d31b6557fa68?crop=entropy&cs=tinysrgb&fit=max&w=600&h=300",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Jane Smith",
-  //     username: "@janesmith",
-  //     post: "Excited to launch my new blog! Check it out. #BlogLife",
-  //     profilePhoto:
-  //       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=faces&fit=crop&w=50&h=50",
-  //     photo:
-  //       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?crop=entropy&cs=tinysrgb&fit=max&w=600",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Mike Johnson",
-  //     username: "@mikejohnson",
-  //     post: "The sunset today was breathtaking. #Photography",
-  //     profilePhoto:
-  //       "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?crop=faces&fit=crop&w=50&h=50",
-  //     photo:
-  //       "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?crop=entropy&cs=tinysrgb&fit=max&w=600",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Emily Davis",
-  //     username: "@emilydavis",
-  //     post: "When life gives you lemons, make lemonade! 🍋",
-  //     profilePhoto:
-  //       "https://images.unsplash.com/photo-1554151228-14d9def656e4?crop=faces&fit=crop&w=50&h=50",
-  //     photo:
-  //       "https://images.unsplash.com/photo-1560807707-8cc77767d783?crop=entropy&cs=tinysrgb&fit=max&w=600",
-  //   },
-  // ];
-  // useEffect(() => {
-  //   Setpost(data);
-  // }, []);
-
   return (
     <div className="h-screen here overflow-hidden overflow-y-auto">
       <Editprofile

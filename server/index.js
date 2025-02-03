@@ -1,26 +1,26 @@
 const { MongoClient } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
+const axios = require('axios')
 require('dotenv').config();
 const uri = process.env.MONGO_URI;
-console.log(process.env);
+const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
 
 const PORT = 5000;
 const app = express();
 
 app.use(
   cors({
-    origin: 'https://twitter-task-nullclass.netlify.app', // Replace with your Netlify URL
+    origin: [
+      "http://localhost:5173",
+      "https://twitter-task-nullclass.netlify.app"
+    ],
     methods: 'GET,POST,PUT,DELETE',
-    credentials: true, // If using cookies or authentication
+    credentials: true,
   })
 );
-// app.use(cors())
 
 app.use(express.json());
-
-// const uri =
-//   "mongodb+srv://admin:admin123@twitter.hyoyp.mongodb.net/?retryWrites=true&w=majority&appName=twitter";
 
 const client = new MongoClient(uri);
 
@@ -112,6 +112,22 @@ run().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("Twitter is working");
+});
+app.get("/search-tweets", async (req, res) => {
+  const query = req.query.q; // Get search query from URL params
+
+  try {
+    const response = await axios.get(
+      `https://api.twitter.com/2/tweets/search/recent?query=${query}`,
+      {
+        headers: { Authorization: `Bearer ${BEARER_TOKEN}` },
+      }
+    );
+    res.json(response.data); // Return the response from Twitter API
+  } catch (error) {
+    console.error("Error fetching tweets", error);
+    res.status(500).json({ error: "Error fetching tweets" });
+  }
 });
 
 app.listen(PORT, () => {

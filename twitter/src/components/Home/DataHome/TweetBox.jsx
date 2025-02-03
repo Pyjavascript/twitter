@@ -13,6 +13,7 @@ function TweetBox() {
   const { user } = useUserAuth();
   const [loggedinuser] = useLoggedinuser();
   const email = user?.email;
+  
   const useprofilepic = loggedinuser[0]?.profileImage
     ? loggedinuser[0].profileImage
     : user && user.photoURL;

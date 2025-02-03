@@ -1,5 +1,6 @@
 import Sidebar from '../Home/Sidebar'
 import Widget from '../Home/Widget'
+import Chatbot from '../Chatbot'
 import { Outlet, useNavigate } from 'react-router-dom'
 import '/src/App.css'
 import { useUserAuth } from '../../context/userauth'
@@ -29,7 +30,7 @@ function Home() {
       <div className="flex-1 lg:w-3/5 overflow-y-auto">
         <Outlet />
       </div>
-      <div className="hidden md:hidden lg:block">
+      <div className="hidden md:hidden lg:block w-1/3">
         <Widget />
       </div>
     </div>

@@ -30,7 +30,7 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
   ];
 
   const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 100 }, (_, index) => currentYear - index); // Last 100 years
+  const years = Array.from({ length: 100 }, (_, index) => currentYear - index);
 
   const daysInMonth = (month, year) => {
     const date = new Date(year, month, 0);
@@ -38,7 +38,6 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
   };
   const [days, setDays] = useState([]);
 
-  // Update days based on the selected month and year
   const handleMonthChange = (month) => {
     setSelectedMonth(month);
     if (month && selectedYear) {
@@ -56,9 +55,8 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
   };
   const handleDateChange = () => {
     if (selectedDay && selectedMonth && selectedYear) {
-      // Format the date as 'YYYY-MM-DD'
       const formattedDob = `${selectedYear}-${months.indexOf(selectedMonth) + 1}-${selectedDay < 10 ? `0${selectedDay}` : selectedDay}`;
-      Setdob(formattedDob); // Set the formatted date into the dob state
+      Setdob(formattedDob);
     }
   };
   
@@ -67,7 +65,6 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
   }, [selectedDay, selectedMonth, selectedYear]);
   return (
     <>
-      {/* Outer box for modal background */}
       <div
         className={`h-screen w-screen bg-slate-400 bg-opacity-50 flex justify-center items-center fixed left-0 top-0 z-10 sm:p-2 ${
           open ? "block" : "hidden"
@@ -109,9 +106,8 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
           ""
         )}
 
-        {/* Main container for the form */}
+  
         <div className="bg-white md:max-h-[90vh] h-full w-full sm:w-2/5 overflow-y-auto rounded-lg relative pb-10">
-          {/* Header */}
           <div className="backdrop-blur-sm w-full bg-[rgba(255,255,255,.7)] flex justify-between items-center sticky top-0 py-3 px-4 z-20">
             <div className="flex items-center gap-4">
               <button onClick={() => Setopen(false)} className="text-3xl">
@@ -123,8 +119,6 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
               Save
             </button>
           </div>
-
-          {/* Profile image section */}
           <div className="relative mt-0 px-1">
             <div className="flex justify-center items-center w-full h-48 bg-slate-300">
               <Upload />
@@ -140,8 +134,6 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
               />
             </div>
           </div>
-
-          {/* Form fields */}
           <div className="mt-20 flex flex-col gap-6 px-4">
             {[
               { label: "Name", value: "name", setValue: Setname },
@@ -204,7 +196,6 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
 
               {dobinfo ? (
                 <div className="flex gap-4 mt-2">
-                  {/* Month Selector */}
                   <div className="relative">
                     <select
                       id="month"
@@ -222,8 +213,6 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
                       ))}
                     </select>
                   </div>
-
-                  {/* Day Selector */}
                   <div className="relative">
                     <select
                       id="day"
@@ -241,8 +230,6 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
                       ))}
                     </select>
                   </div>
-
-                  {/* Year Selector */}
                   <div className="relative">
                     <select
                       id="year"
@@ -271,8 +258,6 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
                 </div>
               )}
             </div>
-
-            {/* Additional options */}
             <div className="w-full flex justify-between items-end cursor-pointer">
               <p className="text-xl">Create expanded bio</p>
               <div className="text-slate-500">
