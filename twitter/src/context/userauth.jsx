@@ -17,7 +17,7 @@ export function UserAuthContextprovider({ children }) {
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
-  function signin(email, password) {
+  function createwithemail(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
   function logout() {
@@ -38,7 +38,7 @@ export function UserAuthContextprovider({ children }) {
   }, []);
   return (
     <userAuthcontext.Provider
-      value={{ user, login, signin, logout, googlesignIn }}
+      value={{ user, login, createwithemail, logout, googlesignIn }}
     >
       {children}
     </userAuthcontext.Provider>

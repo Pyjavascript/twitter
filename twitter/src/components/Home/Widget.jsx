@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
 
 function Widget() {
-  const [searchQuery, setSearchQuery] = useState("Twitter");
+  const [searchQuery, setSearchQuery] = useState("Technology"); // Default search topic
 
   useEffect(() => {
     // Load Twitter widget script dynamically
@@ -39,7 +39,7 @@ function Widget() {
         </div>
       </div>
 
-      {/* Twitter Timeline Embed */}
+      {/* Twitter Search Feed */}
       <div className="flex flex-col gap-1 pl-2 overflow-hidden">
         <h2 className="font-extrabold text-2xl">
           Search Results for "{searchQuery}"
@@ -51,7 +51,7 @@ function Widget() {
             className="twitter-timeline"
             data-height="510"
             data-width="340"
-            href={`https://twitter.com/${searchQuery}`}
+            href={`https://twitter.com/search?q=${encodeURIComponent(searchQuery)}&f=live`}
           >
             Loading tweets...
           </a>

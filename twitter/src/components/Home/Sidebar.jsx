@@ -14,11 +14,11 @@ import {
   PremIcon,
   Dots,
 } from "./Icons";
-import useLoggedinuser from "../../hooks/useLoggedinuser";
+// import useLoggedinuser from "../../hooks/useLoggedinuser";
 function Sidebar({ handlelogout, user }) {
   const [anchor, setAnchor] = useState(null);
-  const openMenu = Boolean(anchor);
-  const {loggedinuser} = useLoggedinuser();
+  // const openMenu = Boolean(anchor);
+  // const {loggedinuser} = useLoggedinuser();
   const navigate = useNavigate();
 
   const handleClick = (e) => {

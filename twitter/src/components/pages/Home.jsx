@@ -16,7 +16,7 @@ function Home() {
   const handlelout = async () => {
     try {
       await logout()
-      navigate('/login')
+      navigate('/signup')
     } catch (e) {
       console.log(e.message)
     }
@@ -31,7 +31,7 @@ function Home() {
         <Outlet />
       </div>
       <div className="hidden md:hidden lg:block w-1/3">
-        <Widget />
+        {/* <Widget /> */}
       </div>
     </div>
   )

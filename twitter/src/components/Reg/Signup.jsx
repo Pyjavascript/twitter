@@ -8,13 +8,13 @@ function signup() {
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
   const [error, SetError] = useState("");
-  const { signin } = useUserAuth();
-  const { googlesignIn } = useUserAuth();
+  // const { signin } = useUserAuth();
+  const { googlesignIn,createwithemail } = useUserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signin(email, password);
+      await createwithemail(email, password);
       const user = {
         user: User,
         name: name,

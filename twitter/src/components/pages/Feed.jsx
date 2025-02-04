@@ -1,8 +1,11 @@
 import {useState,useEffect} from 'react'
 import Posts from '../Home/DataHome/Posts';
 import TweetBox from '../Home/DataHome/TweetBox';
+import { useUserAuth } from '../../context/userauth'
 function Feed() {
   const [post,SetPost] = useState([])
+  const {user} = useUserAuth()
+  
   useEffect(() => {
     fetch('http://localhost:3000/post')
     .then(res => res.json())
@@ -12,8 +15,7 @@ function Feed() {
   },[])
 
   const [sec,Setsec] = useState('you')
-  const profileImage =
-  "https://wallpapers.com/images/hd/tanjiro-pictures-d95tyjljedvuafjf.jpg";
+  const profileImage = user?.photoURL || user?.profileImage || "/avatar.png";
 
   return (
     <>

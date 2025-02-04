@@ -3,8 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useUserAuth } from "../../context/userauth";
 function Login() {
   const navigate = useNavigate();
-  const [User, SetUser] = useState("");
-  const [name, SetName] = useState("");
+  // const [User, SetUser] = useState("");
+  // const [name, SetName] = useState("");
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
   const [error, SetError] = useState("");
@@ -45,22 +45,6 @@ function Login() {
             <h2 className="text-2xl font-medium">Join twitter today</h2>
             <form action="" className="flex flex-col gap-3 w-2/4">
               <input
-                type="text"
-                placeholder="@username"
-                className="bg-slate-200 placeholder:text-slate-500 p-3 w-64 py-2 rounded-lg focus:outline outline-[#419CF1] outline-2"
-                value={User}
-                onChange={(e) => SetUser(e.target.value)}
-                autoComplete="username"
-              />
-              <input
-                type="text"
-                placeholder="Enter Full Name"
-                className="bg-slate-200 placeholder:text-slate-500 p-3 w-64 py-2 rounded-lg focus:outline outline-[#419CF1] outline-2"
-                value={name}
-                onChange={(e) => SetName(e.target.value)}
-                autoComplete="name"
-              />
-              <input
                 type="email"
                 placeholder="Email Address"
                 className="bg-slate-200 placeholder:text-slate-500 p-3 w-64 py-2 rounded-lg focus:outline outline-[#419CF1] outline-2"
@@ -98,9 +82,9 @@ function Login() {
                   <p>Sign in with Google</p>
                 </div>
                 <p className="md:pl-8 text-sm w-60 flex justify-center items-center">
-                  Already have an account
-                  <Link to="/login" className="text-[#419CF1]">
-                    Log in
+                  New account ?
+                  <Link to="/Signup" className="text-[#419CF1]">
+                    Create
                   </Link>
                 </p>
               </div>
