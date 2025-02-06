@@ -21,8 +21,9 @@ export function UserAuthContextProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  function createWithEmail(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  async function createWithEmail(email, password) {
+    let res = await createUserWithEmailAndPassword(auth, email, password);
+    return res
   }
 
   function logout() {

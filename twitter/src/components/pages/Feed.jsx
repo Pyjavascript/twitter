@@ -2,15 +2,18 @@ import {useState,useEffect} from 'react'
 import Posts from '../Home/DataHome/Posts';
 import TweetBox from '../Home/DataHome/TweetBox';
 import { useUserAuth } from '../../context/userauth'
+import Create from '../icons/Create'
 function Feed() {
+  const [isOpen,SetisOpen] = useState(false)
   const [post,SetPost] = useState([])
   const {user} = useUserAuth()
   
   useEffect(() => {
-    fetch('http://localhost:3000/post')
+    fetch('http://localhost:3000/api/post')
     .then(res => res.json())
     .then(data => {
       SetPost(data)
+      
     })
   },[])
 
@@ -19,7 +22,7 @@ function Feed() {
 
   return (
     <>
-    <div className="sm:hidden flex justify-between p-2">
+    <div className="sm:hidden flex justify-between p-2 relative">
         <img
           src={profileImage}
           alt="Profile"
@@ -49,11 +52,28 @@ function Feed() {
           </div>
         </div>
       </div>
+      <div className='hidden md:block'>
       <TweetBox />
+      </div>
       {post.map((p,i) => (
         <Posts key={i} p={p} />
       ))}
     </div>
+    <div className='fixed bottom-16 right-5 bg-[rgba(65,156,241,1)] shadow-lg h-14 w-14 rounded-full flex justify-center items-center' onClick={() => SetisOpen((prev) => !prev)}>
+      <Create/>
+    </div>
+    {
+      isOpen ? (
+        <div className='bg-white h-screen w-screen absolute top-0 left-0'>
+          <div className='w-full p-3 py-0 pt-2'>
+            <div className='text-3xl' onClick={() => SetisOpen((prev) => !prev)}>
+            <ion-icon name="arrow-back-outline"></ion-icon>
+            </div>
+          </div>
+          <TweetBox />
+        </div>
+      ) : ""
+    }
     </>
   )
 }

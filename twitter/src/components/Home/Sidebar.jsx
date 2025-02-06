@@ -85,7 +85,7 @@ function Sidebar({ handlelogout, user }) {
             <p className="font-bold">Add an existing account</p>
             <p onClick={handlelogout} className="font-bold">Log out @{result}</p>
           </div>
-          <div className="flex justify-start items-center gap-2">
+          <div className="flex justify-start items-center -ml-5">
           <img
             src={profileImage}
             alt="Profile"

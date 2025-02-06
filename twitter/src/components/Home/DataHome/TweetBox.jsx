@@ -11,12 +11,10 @@ function TweetBox() {
   const [name, Setname] = useState("");
   const [username, Setusername] = useState("");
   const { user } = useUserAuth();
-  const [loggedinuser] = useLoggedinuser();
+  // const [loggedinuser] = useLoggedinuser();
   const email = user?.email;
   
-  const useprofilepic = loggedinuser[0]?.profileImage
-    ? loggedinuser[0].profileImage
-    : user && user.photoURL;
+  const profileImage = user?.photoURL || user?.profileImage || "/avatar.png";
   const handleuploadimag = (e) => {
     Setisloading(true);
     const img = e.target.files[0];
@@ -37,11 +35,12 @@ function TweetBox() {
   const handletweet = (e) => {
     e.preventDefault();
     if (user?.providerData[0]?.providerId === "password") {
-      fetch(`http://localhost:3000/loggedinuser?email=${email}`)
+      fetch(`http://localhost:3000/api/loggedinuser?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
-          Setname(data[0].name);
+          Setname(data[0].displayName);
           Setusername(data[0].username);
+          
         });
     } else {
       Setname(user?.displayName)
@@ -49,16 +48,18 @@ function TweetBox() {
     }
     if(name){
       const userpost = {
-        profilephoto: useprofilepic,
+        profilephoto: profileImage,
         post:post,
         photo:imgurl,
         username:username,
         name: name,
         email: email
       }
+      console.log(userpost);
+      
       Setimgurl('')
       SetPost('')
-      fetch('http://localhost:3000/post',{
+      fetch('http://localhost:3000/api/post',{
         method:"POST",
         headers:{
           'content-type': 'application/json'
@@ -73,12 +74,12 @@ function TweetBox() {
     }
   };
   return (
-    <div className="hidden sm:block md:block border-b-[1px]">
+    <div className=" sm:block md:block border-b-[1px]">
       <form onSubmit={handletweet}>
         <div className="flex gap-2 p-2 pt-4">
           <div
             style={{
-              backgroundImage: `url(${useprofilepic})`,
+              backgroundImage: `url(${profileImage})`,
               backgroundSize: "contain",
               backgroundPosition: "center",
               borderRadius: "50%",

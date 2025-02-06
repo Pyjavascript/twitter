@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useUserAuth } from "../../context/userauth";
+import { updateProfile } from "firebase/auth"; 
 function signup() {
   const navigate = useNavigate();
   const [User, SetUser] = useState("");
@@ -9,33 +10,45 @@ function signup() {
   const [password, SetPassword] = useState("");
   const [error, SetError] = useState("");
   // const { signin } = useUserAuth();
-  const { googlesignIn,createwithemail } = useUserAuth();
+  const { googleSignIn,createWithEmail } = useUserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createwithemail(email, password);
-      const user = {
-        user: User,
-        name: name,
-        email: email,
-        password: password,
-      };
-      console.log("Data being sent to backend:", user);
-      fetch("http://localhost:3000/register", {
+      const userCredential = await createWithEmail(email, password);
+      const user = userCredential.user;
+  
+      // ✅ Set displayName for Email/Password sign-up
+      await updateProfile(user, {
+        displayName: User, // Username from input field
+      });
+  
+      console.log("User signed up:", user);
+      console.log("Updated displayName:", user.displayName);
+  
+      await user.reload(); // ✅ Refresh user state
+  
+      // ✅ Send updated user data to backend
+      fetch("http://localhost:3000/api/register", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify({
+          displayName: user.displayName, // Now correctly set
+          name: name,
+          email: email,
+          password: password,
+        }),
       })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.acknowledged) {
-            console.log(data);
-            navigate("/");
-          }
-        });
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          console.log("User registered:", data);
+          navigate("/");
+        }
+      });
+  
     } catch (err) {
       SetError(err.message);
       window.alert(err.message);
@@ -43,37 +56,35 @@ function signup() {
   };
   const handleGoogle = async (e) => {
     e.preventDefault();
-  try {
-    // Google sign-in response
-    const userCredential = await googlesignIn();
-    const user = userCredential.user; // This gives access to the user details
-
-    console.log("Google User Data:", user); // Check the response
-
-    // Sending the Google user data to the backend
-    fetch("http://localhost:3000/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user: user.displayName, // Google display name
-        email: user.email, // Google email
-        // Include other data as needed
-      }),
-    })
+    try {
+      const userCredential = await googleSignIn();
+      const user = userCredential.user;
+  
+      console.log("Google User Data:", user);
+  
+      // ✅ Google already provides displayName, send it to backend
+      fetch("http://localhost:3000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          displayName: user.displayName, // Already set by Google
+          email: user.email,
+        }),
+      })
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          console.log("User registered:", data);
-          navigate("/"); // Redirect after successful registration
+          console.log("Google User registered:", data);
+          navigate("/");
         }
       });
-  } catch (err) {
-    console.log("Google sign-in error:", err);
-  }
+  
+    } catch (err) {
+      console.log("Google sign-in error:", err);
+    }
   };
-
   return (
     <div className="h-screen w-screen flex">
       <div className="h-screen hidden md:flex md:w-1/2 bg-sky-500">
