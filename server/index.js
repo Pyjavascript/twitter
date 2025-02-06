@@ -1,10 +1,9 @@
 const { MongoClient } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
-const axios = require('axios')
 require('dotenv').config();
 const uri = process.env.MONGO_URI;
-const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
+// const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
 
 const PORT = 3000;
 const app = express();
@@ -112,22 +111,6 @@ run().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("Twitter is working");
-});
-app.get("/search-tweets", async (req, res) => {
-  const query = req.query.q; // Get search query from URL params
-
-  try {
-    const response = await axios.get(
-      `https://api.twitter.com/2/tweets/search/recent?query=${query}`,
-      {
-        headers: { Authorization: `Bearer ${BEARER_TOKEN}` },
-      }
-    );
-    res.json(response.data); // Return the response from Twitter API
-  } catch (error) {
-    console.error("Error fetching tweets", error);
-    res.status(500).json({ error: "Error fetching tweets" });
-  }
 });
 
 app.listen(PORT, () => {

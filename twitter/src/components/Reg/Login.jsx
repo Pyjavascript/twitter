@@ -3,8 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { useUserAuth } from "../../context/userauth";
 function Login() {
   const navigate = useNavigate();
-  // const [User, SetUser] = useState("");
-  // const [name, SetName] = useState("");
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
   const [error, SetError] = useState("");

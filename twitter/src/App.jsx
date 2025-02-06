@@ -1,17 +1,19 @@
 import { Routes, Route } from "react-router-dom";
-import {Signup,Login,Home,Feed,Explore,Notification,Message,Lists,Profiles,More,Bookmark
+import {Signup,Login,Home,Feed,Explore,Notification,Message,Lists,Profiles,More,Bookmark,PhoneAuth
 } from "./index";
 import './App.css'
-import { UserAuthContextprovider } from "./context/userauth";
+import { UserAuthContextProvider } from "./context/userauth";
+
 
 function App() {
   return (
     <>
-    <UserAuthContextprovider>
+    <UserAuthContextProvider>
       <Routes>
         {/* Public Routes */}
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/phoneauth" element={<PhoneAuth />} />
         <Route path="/" element={<Home />}>
         <Route index element={<Feed />}/>
         </Route>
@@ -28,7 +30,7 @@ function App() {
           <Route path="more" element={<More />} />
         </Route>
       </Routes>
-      </UserAuthContextprovider>
+      </UserAuthContextProvider>
     </>
   );
 }

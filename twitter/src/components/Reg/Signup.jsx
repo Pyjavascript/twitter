@@ -147,6 +147,12 @@ function signup() {
                     Log in
                   </Link>
                 </p>
+                <p className="md:pl-8 text-sm w-60 flex justify-center items-center">
+                  Create Using Phone
+                  <Link to="/PhoneAuth" className="text-[#419CF1]">
+                    Here
+                  </Link>
+                </p>
               </div>
             </form>
           </div>

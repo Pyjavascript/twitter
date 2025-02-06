@@ -11,7 +11,8 @@ import Lists from './components/pages/Lists'
 import Profiles from './components/pages/Profiles'
 import More from './components/pages/More'
 import Bookmark from './components/pages/Bookmark'
+import PhoneAuth from './components/Reg/PhoneAuth'
 
 
 
-export {Signup,Login,Home,Sidebar,Widget,Feed,Explore,Notification,Message,Lists,Profiles,More,Bookmark}
+export {PhoneAuth,Signup,Login,Home,Sidebar,Widget,Feed,Explore,Notification,Message,Lists,Profiles,More,Bookmark}

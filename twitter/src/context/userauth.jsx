@@ -5,46 +5,61 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
 } from 'firebase/auth';
 
 import { auth } from "./firebase";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const userAuthcontext = createContext();
+const userAuthContext = createContext();
 
-export function UserAuthContextprovider({ children }) {
-  const [user, setUser] = useState([]);
+export function UserAuthContextProvider({ children }) {
+  const [user, setUser] = useState(null);
+
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
-  function createwithemail(email, password) {
+
+  function createWithEmail(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
+
   function logout() {
     return signOut(auth);
   }
-  function googlesignIn() {
-    const googleauthprovider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleauthprovider);
+
+  function googleSignIn() {
+    const googleAuthProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleAuthProvider);
   }
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-      console.log("Auth", currentuser);
-      setUser(currentuser);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log("Auth State Changed:", currentUser);
+      setUser(currentUser);
     });
+
     return () => {
-      unsubscribe;
+      unsubscribe(); // Properly unsubscribe
     };
   }, []);
+
   return (
-    <userAuthcontext.Provider
-      value={{ user, login, createwithemail, logout, googlesignIn }}
+    <userAuthContext.Provider
+      value={{
+        user,
+        login,
+        createWithEmail,
+        logout,
+        googleSignIn,
+      }}
     >
       {children}
-    </userAuthcontext.Provider>
+    </userAuthContext.Provider>
   );
 }
 
-export function useUserAuth(){
-    return useContext(userAuthcontext)
+export function useUserAuth() {
+  return useContext(userAuthContext);
 }
