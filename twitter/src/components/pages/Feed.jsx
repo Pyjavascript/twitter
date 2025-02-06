@@ -9,7 +9,7 @@ function Feed() {
   const {user} = useUserAuth()
   
   useEffect(() => {
-    fetch('http://localhost:3000/api/post')
+    fetch('http://localhost:4000/api/post')
     .then(res => res.json())
     .then(data => {
       SetPost(data)

@@ -6,7 +6,7 @@ const postRoutes = require("./routes/postRoutes");
 require("dotenv").config();
 
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
 app.use(cors);
 app.use(express.json());
