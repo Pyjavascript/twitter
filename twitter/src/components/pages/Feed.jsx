@@ -1,28 +1,40 @@
-import {useState,useEffect} from 'react'
-import Posts from '../Home/DataHome/Posts';
-import TweetBox from '../Home/DataHome/TweetBox';
-import { useUserAuth } from '../../context/userauth'
-import Create from '../icons/Create'
+import { useState, useEffect, useContext } from "react";
+import Posts from "../Home/DataHome/Posts";
+import TweetBox from "../Home/DataHome/TweetBox";
+import { useUserAuth } from "../../context/userauth";
+import Create from "../icons/Create";
+import { StateContext } from "../../context/StateContext";
 function Feed() {
-  const [isOpen,SetisOpen] = useState(false)
-  const [post,SetPost] = useState([])
-  const {user} = useUserAuth()
-  
-  useEffect(() => {
-    fetch('http://localhost:4000/api/post')
-    .then(res => res.json())
-    .then(data => {
-      SetPost(data)
-      
-    })
-  },[])
+  const { setShowNavbar } = useContext(StateContext);
+  const [isOpen, SetisOpen] = useState(false);
+  const [post, SetPost] = useState([]);
+  const { user } = useUserAuth();
+  // console.log(user);
 
-  const [sec,Setsec] = useState('you')
+  // console.log(user);
+
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`http://localhost:3000/api/post?user=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          SetPost(data);
+        })
+        .catch((err) => console.error("Error fetching posts:", err));
+    }
+  }, [user]);
+
+  const [sec, Setsec] = useState("you");
   const profileImage = user?.photoURL || user?.profileImage || "/avatar.png";
 
   return (
     <>
-    <div className="sm:hidden flex justify-between p-2 relative">
+      <div
+        className="sm:hidden flex justify-between p-2 relative"
+        onClick={() => {
+          setShowNavbar((prev) => !prev);
+        }}
+      >
         <img
           src={profileImage}
           alt="Profile"
@@ -37,45 +49,65 @@ function Feed() {
           </p>
         </div>
       </div>
-    <div className='h-screen overflow-hidden overflow-y-auto posts'>
-      <div className='w-full flex justify-between border-b-[1px]'>
-        <div className={`relative ${sec == 'you' ? 'text-black' : 'text-slate-400'} font-semibold py-3 w-1/2 h-full flex flex-col justify-center items-center hover:bg-slate-100 cursor-pointer`} onClick={() => Setsec("you")}>
-          <p>For you</p>
-          <div className={`${sec == 'you' ? 'block': 'hidden'} absolute rounded-full bottom-0 w-14 h-1 bg-[rgba(65,156,241,1)]`}>
-
+      <div className="h-screen overflow-hidden overflow-y-auto posts">
+        <div className="w-full flex justify-between border-b-[1px]">
+          <div
+            className={`relative ${
+              sec == "you" ? "text-black" : "text-slate-400"
+            } font-semibold py-3 w-1/2 h-full flex flex-col justify-center items-center hover:bg-slate-100 cursor-pointer`}
+            onClick={() => Setsec("you")}
+          >
+            <p>For you</p>
+            <div
+              className={`${
+                sec == "you" ? "block" : "hidden"
+              } absolute rounded-full bottom-0 w-14 h-1 bg-[rgba(65,156,241,1)]`}
+            ></div>
+          </div>
+          <div
+            className={`relative ${
+              sec == "follow" ? "text-black" : "text-slate-400"
+            } font-semibold py-3 w-1/2 h-full flex justify-center items-center hover:bg-slate-100 cursor-pointer`}
+            onClick={() => Setsec("follow")}
+          >
+            <p>Following</p>
+            <div
+              className={`${
+                sec == "follow" ? "block" : "hidden"
+              } absolute rounded-full bottom-0 w-14 h-1 bg-[rgba(65,156,241,1)]`}
+            ></div>
           </div>
         </div>
-        <div className={`relative ${sec == 'follow' ? 'text-black' : 'text-slate-400'} font-semibold py-3 w-1/2 h-full flex justify-center items-center hover:bg-slate-100 cursor-pointer`} onClick={() => Setsec("follow")}>
-          <p>Following</p>
-          <div className={`${sec == 'follow' ? 'block': 'hidden'} absolute rounded-full bottom-0 w-14 h-1 bg-[rgba(65,156,241,1)]`}>
-
-          </div>
+        <div className="hidden md:block">
+          <TweetBox />
         </div>
+        {post.map((p, i) => (
+          <Posts key={i} p={p} />
+        ))}
       </div>
-      <div className='hidden md:block'>
-      <TweetBox />
+      <div
+        className="fixed bottom-16 right-5 bg-[rgba(65,156,241,1)] shadow-lg h-14 w-14 rounded-full flex justify-center items-center -z-10"
+        onClick={() => SetisOpen((prev) => !prev)}
+      >
+        <Create />
       </div>
-      {post.map((p,i) => (
-        <Posts key={i} p={p} />
-      ))}
-    </div>
-    <div className='fixed bottom-16 right-5 bg-[rgba(65,156,241,1)] shadow-lg h-14 w-14 rounded-full flex justify-center items-center' onClick={() => SetisOpen((prev) => !prev)}>
-      <Create/>
-    </div>
-    {
-      isOpen ? (
-        <div className='bg-white h-screen w-screen absolute top-0 left-0'>
-          <div className='w-full p-3 py-0 pt-2'>
-            <div className='text-3xl' onClick={() => SetisOpen((prev) => !prev)}>
-            <ion-icon name="arrow-back-outline"></ion-icon>
+      {isOpen ? (
+        <div className="bg-white h-screen w-screen absolute top-0 left-0">
+          <div className="w-full p-3 py-0 pt-2">
+            <div
+              className="text-3xl"
+              onClick={() => SetisOpen((prev) => !prev)}
+            >
+              <ion-icon name="arrow-back-outline"></ion-icon>
             </div>
           </div>
           <TweetBox />
         </div>
-      ) : ""
-    }
+      ) : (
+        ""
+      )}
     </>
-  )
+  );
 }
 
-export default Feed
+export default Feed;

@@ -35,7 +35,7 @@ function TweetBox() {
   const handletweet = (e) => {
     e.preventDefault();
     if (user?.providerData[0]?.providerId === "password") {
-      fetch(`http://localhost:4000/api/loggedinuser?email=${email}`)
+      fetch(`http://localhost:3000/api/loggedinuser?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           Setname(data[0].displayName);
@@ -59,7 +59,7 @@ function TweetBox() {
       
       Setimgurl('')
       SetPost('')
-      fetch('http://localhost:4000/api/post',{
+      fetch('http://localhost:3000/api/post',{
         method:"POST",
         headers:{
           'content-type': 'application/json'

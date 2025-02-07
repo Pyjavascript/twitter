@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import {Signup,Login,Home,Feed,Explore,Notification,Message,Lists,Profiles,More,Bookmark,PhoneAuth
 } from "./index";
 import './App.css'
+import { StateProvider } from "./context/StateContext";
 import { UserAuthContextProvider } from "./context/userauth";
 
 
@@ -9,6 +10,7 @@ function App() {
   return (
     <>
     <UserAuthContextProvider>
+      <StateProvider>
       <Routes>
         {/* Public Routes */}
         <Route path="/signup" element={<Signup />} />
@@ -30,6 +32,7 @@ function App() {
           <Route path="more" element={<More />} />
         </Route>
       </Routes>
+      </StateProvider>
       </UserAuthContextProvider>
     </>
   );

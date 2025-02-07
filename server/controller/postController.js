@@ -13,13 +13,18 @@ exports.createPost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
   try {
-    const posts = (await Post.find().toArray()).reverse();
+    const { user } = req.query;
+    if (!user) {
+      return res.status(400).send({ message: "User email is required" });
+    }
+    const posts = (await Post.find({ email: user }).toArray()).reverse();
     res.send(posts);
   } catch (error) {
     console.error("Error fetching posts:", error);
     res.status(500).send({ message: "Internal Server Error" });
   }
 };
+
 
 exports.getUserPosts = async (req, res) => {
   try {

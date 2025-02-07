@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Customlink from "./Customlink";
 import Sidebaropt from "./Sidebaropt";
+import { StateContext } from '../../context/StateContext';
 import {
   MoreIcon,
   ProfileIcon,
@@ -45,6 +46,7 @@ function Sidebar({ handlelogout, user }) {
     { to: "more", icon: <MoreIcon />, text: "More" },
   ];
   const [show,SetShow] = useState(false)
+  const { showNavbar,setShowNavbar } = useContext(StateContext);
 
   return (
     <>
@@ -63,12 +65,18 @@ function Sidebar({ handlelogout, user }) {
           </p>
         </div>
       </div> */}
-      <div className="hidden sm:flex flex-col justify-between md:w-64 gap-1 p-2 border-r h-screen ">
+      <div className={`w-screen  flex-col justify-between md:w-64 gap-1 p-2 border-r h-screen  ${showNavbar ? 'flex' : 'hidden'} z-30`}>
         <div>
-          <div className="text-[#419CF1] text-3xl p-2 px-4">
+          <div className="text-[#419CF1] text-3xl p-2 px-4 w-full flex justify-between">
             <ion-icon name="logo-twitter"></ion-icon>
+            <div  onClick={() => {
+          setShowNavbar((prev) => !prev);
+        }}>
+
+            <ion-icon name="close-outline"></ion-icon>
+            </div>
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="w-1/2 flex flex-col gap-1">
             {links.map(({ to, icon, text }) => (
               <Customlink key={to} to={to}>
                 <Sidebaropt icon={icon} text={text} />
@@ -76,11 +84,13 @@ function Sidebar({ handlelogout, user }) {
             ))}
           </div>
         </div>
-        <button className="hidden lg:block bg-blue-500 text-white px-4 py-2 rounded-full">
+        <div className="px-5">
+        <button className="md:w-2/3 lg:block bg-blue-500 text-white px-10 md:px-4 py-2 rounded-full">
           Tweet
         </button>
+        </div>
 
-        <div className=" flex items-center justify-center lg:justify-start gap-10 active:bg-slate-200 p-2 relative rounded-full cursor-pointer transition-all " onClick={() => SetShow((prev) => !prev)}>
+        <div className="flex items-center md:justify-center justify-start mt-4 px-8 lg:justify-start gap-8 active:bg-slate-200 md:p-2 relative rounded-full cursor-pointer transition-all w-2/3 md:w-full" onClick={() => SetShow((prev) => !prev)}>
           <div className={`w-64 h-24 absolute -left-3 -top-28 bg-white rounded-xl shadow-xl p-5 ${show ? 'flex' : 'hidden'} flex-col justify-between px-6`}>
             <p className="font-bold">Add an existing account</p>
             <p onClick={handlelogout} className="font-bold">Log out @{result}</p>
@@ -91,14 +101,14 @@ function Sidebar({ handlelogout, user }) {
             alt="Profile"
             className="w-12 h-12 rounded-full"
           />
-          <div className="hidden md:block lg:block">
+          <div className="md:block lg:block">
             <h4 className="text-black font-bold">
               {user?.displayName || "Guest User"}
             </h4>
             <h5 className="text-gray-400 -mt-1">@{result || "username"}</h5>
           </div>
           </div>
-          <div className="hidden md:block cursor-pointer hover:bg-sky-50 rounded-full p-2 ">
+          <div className=" md:block cursor-pointer hover:bg-sky-50 rounded-full p-2 ">
             <Dots />
           </div>
         </div>

@@ -29,7 +29,7 @@ function signup() {
       await user.reload(); // ✅ Refresh user state
   
       // ✅ Send updated user data to backend
-      fetch("http://localhost:4000/api/register", {
+      fetch("http://localhost:3000/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ function signup() {
       console.log("Google User Data:", user);
   
       // ✅ Google already provides displayName, send it to backend
-      fetch("http://localhost:4000/api/register", {
+      fetch("http://localhost:3000/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
