@@ -86,7 +86,7 @@ function Feed() {
         ))}
       </div>
       <div
-        className="fixed bottom-16 right-5 bg-[rgba(65,156,241,1)] shadow-lg h-14 w-14 rounded-full flex justify-center items-center -z-10"
+        className="fixed bottom-16 right-5 bg-[rgba(65,156,241,1)] shadow-lg h-14 w-14 rounded-full flex justify-center items-center"
         onClick={() => SetisOpen((prev) => !prev)}
       >
         <Create />

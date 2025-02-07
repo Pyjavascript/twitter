@@ -8,5 +8,6 @@ import BookIcon from '../icons/BookIcon'
 import Dots from '../icons/Dots'
 import ListIcon from '../icons/ListIcon'
 import PremIcon from '../icons/PremIcon'
+import Logout from '../icons/Logout'
 
-export {MoreIcon,ProfileIcon,HomeIcon,SearchIcon,NotiIcon,MessIcon,ListIcon,Dots,BookIcon,PremIcon}
+export {MoreIcon,ProfileIcon,HomeIcon,SearchIcon,NotiIcon,MessIcon,ListIcon,Dots,BookIcon,PremIcon,Logout}

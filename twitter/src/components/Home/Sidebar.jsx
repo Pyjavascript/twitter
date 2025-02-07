@@ -14,6 +14,7 @@ import {
   ListIcon,
   PremIcon,
   Dots,
+  Logout
 } from "./Icons";
 // import useLoggedinuser from "../../hooks/useLoggedinuser";
 function Sidebar({ handlelogout, user }) {
@@ -44,6 +45,8 @@ function Sidebar({ handlelogout, user }) {
     { to: "Premium", icon: <PremIcon />, text: "Premium" },
     { to: "profile", icon: <ProfileIcon />, text: "Profile" },
     { to: "more", icon: <MoreIcon />, text: "More" },
+    { to: "/signup", icon: <Logout />, text: "Logout" }
+    // /signup
   ];
   const [show,SetShow] = useState(false)
   const { showNavbar,setShowNavbar } = useContext(StateContext);
