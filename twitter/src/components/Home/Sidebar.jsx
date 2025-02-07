@@ -16,8 +16,10 @@ import {
   Dots,
   Logout
 } from "./Icons";
+import { useUserAuth } from '../../context/userauth'
 // import useLoggedinuser from "../../hooks/useLoggedinuser";
 function Sidebar({ handlelogout, user }) {
+  const {logout} = useUserAuth()
   const [anchor, setAnchor] = useState(null);
   // const openMenu = Boolean(anchor);
   // const {loggedinuser} = useLoggedinuser();
@@ -29,6 +31,14 @@ function Sidebar({ handlelogout, user }) {
   const handleClose = () => {
     setAnchor(null);
   };
+  const handlelout = async () => {
+    try {
+      await logout()
+      navigate('/signup')
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
 
   const result = user?.email?.split("@");
   const profileImage = user?.photoURL || user?.profileImage || "/avatar.png";
@@ -45,7 +55,7 @@ function Sidebar({ handlelogout, user }) {
     { to: "Premium", icon: <PremIcon />, text: "Premium" },
     { to: "profile", icon: <ProfileIcon />, text: "Profile" },
     { to: "more", icon: <MoreIcon />, text: "More" },
-    { to: "/signup", icon: <Logout />, text: "Logout" }
+    // { to: "/signup", icon: <Logout />, text: "Logout" }
     // /signup
   ];
   const [show,SetShow] = useState(false)
@@ -85,6 +95,10 @@ function Sidebar({ handlelogout, user }) {
                 <Sidebaropt icon={icon} text={text} />
               </Customlink>
             ))}
+          </div>
+          <div className="flex px-5 py-1 gap-2" onClick={handlelogout}>
+             <Logout/>
+            <p className="text-xl">Logout</p>
           </div>
         </div>
         <div className="px-5">
