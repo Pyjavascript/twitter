@@ -45,8 +45,7 @@ function signup() {
       .then((data) => {
         if (data.acknowledged) {
           console.log("User registered:", data);
-          // navigate("/");
-          window.location.href = "/";
+          navigate("/");
         }
       });
   
@@ -78,7 +77,7 @@ function signup() {
       .then((data) => {
         if (data.acknowledged) {
           console.log("Google User registered:", data);
-          window.location.href = "/";
+         navigate("/");
         }
       });
   

@@ -81,9 +81,11 @@ function Feed() {
         <div className="hidden md:block">
           <TweetBox />
         </div>
+        <div className="block">
         {post.map((p, i) => (
           <Posts key={i} p={p} />
         ))}
+        </div>
       </div>
       <div
         className="fixed bottom-16 right-5 bg-[rgba(65,156,241,1)] shadow-lg h-14 w-14 rounded-full flex justify-center items-center"
