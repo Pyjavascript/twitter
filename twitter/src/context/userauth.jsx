@@ -5,8 +5,7 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
+ 
 } from 'firebase/auth';
 
 import { auth } from "./firebase";
