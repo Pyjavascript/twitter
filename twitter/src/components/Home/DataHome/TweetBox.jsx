@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImgIco from "./icons/imgIco";
 import axios from "axios";
 import { useUserAuth } from "../../../context/userauth";
-import useLoggedinuser from "../../../hooks/useLoggedinuser";
 
 function TweetBox() {
   const [post, SetPost] = useState("");
@@ -11,10 +10,41 @@ function TweetBox() {
   const [name, Setname] = useState("");
   const [username, Setusername] = useState("");
   const { user } = useUserAuth();
-  // const [loggedinuser] = useLoggedinuser();
   const email = user?.email;
-  
   const profileImage = user?.photoURL || user?.profileImage || "/avatar.png";
+
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
+
+  const requestNotificationPermission = () => {
+    if ("Notification" in window) {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("Notification permission granted.");
+        } else {
+          console.log("Notification permission denied.");
+        }
+      });
+    }
+  };
+
+  const checkTweetForKeywords = (text) => {
+    const keywords = ["cricket", "science"];
+    return keywords.some((keyword) => text.toLowerCase().includes(keyword));
+  };
+
+  const showNotification = (text) => {
+    const notificationsEnabled = localStorage.getItem("notifications") === "enabled";
+    
+    if (notificationsEnabled && Notification.permission === "granted") {
+      new Notification("New Tweet Alert!", {
+        body: text,
+        icon: "/notification-icon.png", // You can add a custom icon
+      });
+    }
+  };
+
   const handleuploadimag = (e) => {
     Setisloading(true);
     const img = e.target.files[0];
@@ -27,54 +57,61 @@ function TweetBox() {
       )
       .then((res) => {
         Setimgurl(res.data.data.display_url);
-        console.log(res.data);
         Setisloading(false);
       })
       .catch((e) => console.log(e));
   };
-  const handletweet = (e) => {
+
+  const handletweet = async (e) => {
     e.preventDefault();
+
+    let tempName = "";
+    let tempUsername = "";
+
     if (user?.providerData[0]?.providerId === "password") {
-      fetch(`http://localhost:3000/api/loggedinuser?email=${email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          Setname(data[0].displayName);
-          Setusername(data[0].username);
-          
-        });
+      const res = await fetch(`http://localhost:3000/api/loggedinuser?email=${email}`);
+      const data = await res.json();
+      tempName = data[0].displayName;
+      tempUsername = data[0].username;
     } else {
-      Setname(user?.displayName)
-      Setusername(email?.split('@')[0])
+      tempName = user?.displayName;
+      tempUsername = email?.split("@")[0];
     }
-    if(name){
+
+    if (tempName) {
       const userpost = {
         profilephoto: profileImage,
-        post:post,
-        photo:imgurl,
-        username:username,
-        name: name,
-        email: email
-      }
+        post: post,
+        photo: imgurl,
+        username: tempUsername,
+        name: tempName,
+        email: email,
+      };
+
       console.log(userpost);
-      
-      Setimgurl('')
-      SetPost('')
-      fetch('http://localhost:3000/api/post',{
-        method:"POST",
-        headers:{
-          'content-type': 'application/json'
+      Setimgurl("");
+      SetPost("");
+
+      if (checkTweetForKeywords(post)) {
+        showNotification(post);
+      }
+
+      fetch("http://localhost:3000/api/post", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
         },
-        body:JSON.stringify(userpost),
+        body: JSON.stringify(userpost),
       })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        
-      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
     }
   };
+
   return (
-    <div className=" sm:block md:block border-b-[1px]">
+    <div className="sm:block md:block border-b-[1px]">
       <form onSubmit={handletweet}>
         <div className="flex gap-2 p-2 pt-4">
           <div
@@ -98,23 +135,20 @@ function TweetBox() {
 
         <div className="flex justify-between items-end p-4 w-full">
           <div className="flex">
-            <div>
-              <label className="cursor-pointer" htmlFor="image">
-                {isloading ? (
-                  <p>Uploading image</p>
-                ) : (
-                  <p>{imgurl ? "Image Uploaded" : <ImgIco />}</p>
-                )}
-              </label>
-              <input
-                type="file"
-                id="image"
-                className="hidden"
-                onChange={handleuploadimag}
-              />
-            </div>
+            <label className="cursor-pointer" htmlFor="image">
+              {isloading ? <p>Uploading image</p> : <p>{imgurl ? "Image Uploaded" : <ImgIco />}</p>}
+            </label>
+            <input
+              type="file"
+              id="image"
+              className="hidden"
+              onChange={handleuploadimag}
+            />
           </div>
-          <button type="submit" className="font-bold bg-[rgba(65,156,241,1)] text-white p-1 px-6 rounded-full">
+          <button
+            type="submit"
+            className="font-bold bg-[rgba(65,156,241,1)] text-white p-1 px-6 rounded-full"
+          >
             Tweet
           </button>
         </div>

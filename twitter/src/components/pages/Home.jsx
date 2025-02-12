@@ -1,6 +1,7 @@
 import Sidebar from '../Home/Sidebar'
 import Widget from '../Home/Widget'
 import Chatbot from '../Chatbot'
+import NotificationComponent from './Notification/NotificationComponent'
 import { Outlet, useNavigate } from 'react-router-dom'
 import '/src/App.css'
 import { useUserAuth } from '../../context/userauth'
@@ -23,7 +24,9 @@ function Home() {
   }
 
   return (
+
     <div className="flex flex-col sm:flex-row p-0 md:px-28 overflow-hidden h-screen">
+      <NotificationComponent/>
       <div>
         <Sidebar handlelogout={handlelout} user={user} />
       </div>

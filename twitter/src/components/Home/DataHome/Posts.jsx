@@ -8,11 +8,11 @@ import Send from "./icons/Send";
 import Views from "./icons/Views";
 
 function Posts({ p }) {
-  const { name, username, post, profilephoto, photo } = p;
+  const { name, username, post, profilephoto, photo, id } = p;
   return (
     <div className="flex justify-start w-full cursor-pointer hover:bg-slate-50">
       <div className="p-2 px-2 flex justify-start gap-1 border-b-[1px]">
-        <div className="  w-10 h-10 sm:w-16 sm:h-16 lg:w-10 lg:h-10">
+        <div className="w-10 h-10 sm:w-16 sm:h-16 lg:w-10 lg:h-10">
           <img
             src={profilephoto}
             className="rounded-full w-full object-cover"

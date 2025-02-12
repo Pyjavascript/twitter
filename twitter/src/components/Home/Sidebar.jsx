@@ -78,11 +78,11 @@ function Sidebar({ handlelogout, user }) {
           </p>
         </div>
       </div> */}
-      <div className={`w-screen  flex-col justify-between md:w-64 gap-1 p-2 border-r h-screen  ${showNavbar ? 'flex' : 'hidden'} z-30`}>
+      <div className={`w-screen  flex-col justify-between md:w-64 gap-1 p-2 border-r h-screen  ${showNavbar ? 'flex' : 'hidden'} md:flex z-30`}>
         <div>
           <div className="text-[#419CF1] text-3xl p-2 px-4 w-full flex justify-between">
             <ion-icon name="logo-twitter"></ion-icon>
-            <div  onClick={() => {
+            <div className="md:hidden"  onClick={() => {
           setShowNavbar((prev) => !prev);
         }}>
 
@@ -107,7 +107,7 @@ function Sidebar({ handlelogout, user }) {
         </button>
         </div>
 
-        <div className="flex items-center md:justify-center justify-start mt-4 px-8 lg:justify-start gap-8 active:bg-slate-200 md:p-2 relative rounded-full cursor-pointer transition-all w-2/3 md:w-full" onClick={() => SetShow((prev) => !prev)}>
+        <div className="flex items-center md:justify-center justify-start px-8 lg:justify-start active:bg-slate-200 md:p-2 relative rounded-full cursor-pointer transition-all w-2/3 md:w-full" onClick={() => SetShow((prev) => !prev)}>
           <div className={`w-64 h-24 absolute -left-3 -top-28 bg-white rounded-xl shadow-xl p-5 ${show ? 'flex' : 'hidden'} flex-col justify-between px-6`}>
             <p className="font-bold">Add an existing account</p>
             <p onClick={handlelogout} className="font-bold">Log out @{result}</p>
@@ -118,7 +118,7 @@ function Sidebar({ handlelogout, user }) {
             alt="Profile"
             className="w-12 h-12 rounded-full"
           />
-          <div className="md:block lg:block">
+          <div className="md:block  lg:block">
             <h4 className="text-black font-bold">
               {user?.displayName || "Guest User"}
             </h4>

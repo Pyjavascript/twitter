@@ -33,36 +33,28 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
   const years = Array.from({ length: 100 }, (_, index) => currentYear - index);
 
   const daysInMonth = (month, year) => {
-    const date = new Date(year, month, 0);
-    return date.getDate();
+    return new Date(year, month, 0).getDate();
   };
   const [days, setDays] = useState([]);
 
   const handleMonthChange = (month) => {
     setSelectedMonth(month);
-    if (month && selectedYear) {
-      const totalDays = daysInMonth(months.indexOf(month) + 1, selectedYear);
-      setDays(Array.from({ length: totalDays }, (_, index) => index + 1));
-    }
+    setDays(Array.from({ length: daysInMonth(month, selectedYear) }, (_, i) => i + 1));
   };
 
   const handleYearChange = (year) => {
     setSelectedYear(year);
-    if (selectedMonth) {
-      const totalDays = daysInMonth(months.indexOf(selectedMonth) + 1, year);
-      setDays(Array.from({ length: totalDays }, (_, index) => index + 1));
-    }
+    setDays(Array.from({ length: daysInMonth(selectedMonth, year) }, (_, i) => i + 1));
   };
+
   const handleDateChange = () => {
-    if (selectedDay && selectedMonth && selectedYear) {
-      const formattedDob = `${selectedYear}-${months.indexOf(selectedMonth) + 1}-${selectedDay < 10 ? `0${selectedDay}` : selectedDay}`;
-      Setdob(formattedDob);
-    }
+    Setdob(`${selectedDay} ${selectedMonth} ${selectedYear}`);
   };
-  
+
   useEffect(() => {
     handleDateChange();
   }, [selectedDay, selectedMonth, selectedYear]);
+
   return (
     <>
       <div

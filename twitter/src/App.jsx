@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import {Signup,Login,Home,Feed,Explore,Notification,Message,Lists,Profiles,More,Bookmark,PhoneAuth
+import {Signup,Login,Home,Feed,Explore,NotificationComponent,Message,Lists,Profiles,More,Bookmark,PhoneAuth
 } from "./index";
 import './App.css'
 import { StateProvider } from "./context/StateContext";
@@ -25,7 +25,7 @@ function App() {
           <Route path="feed" element={<Feed />} />
           <Route path="bookmarks" element={<Bookmark />} />
           <Route path="explore" element={<Explore />} />
-          <Route path="notification" element={<Notification />} />
+          <Route path="notification" element={<NotificationComponent />} />
           <Route path="messages" element={<Message />} />
           <Route path="lists" element={<Lists />} />
           <Route path="profile" element={<Profiles />} />
