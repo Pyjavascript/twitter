@@ -26,7 +26,7 @@ function Home() {
   return (
 
     <div className="flex flex-col sm:flex-row p-0 md:px-28 overflow-hidden h-screen">
-      <NotificationComponent/>
+      {/* <NotificationComponent/> */}
       <div>
         <Sidebar handlelogout={handlelout} user={user} />
       </div>
