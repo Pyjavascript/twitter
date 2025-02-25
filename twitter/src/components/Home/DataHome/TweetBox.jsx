@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import ImgIco from "./icons/imgIco";
 import axios from "axios";
 import { useUserAuth } from "../../../context/userauth";
+import { useTranslation } from "react-i18next";
 
 function TweetBox() {
+  const { t } = useTranslation();
   const [post, SetPost] = useState("");
   const [imgurl, Setimgurl] = useState("");
   const [isloading, Setisloading] = useState(false);
@@ -127,7 +129,7 @@ function TweetBox() {
           <input
             className="text-lg outline-none"
             type="text"
-            placeholder="What is happening?!"
+            placeholder={t("tweetBox.placeholder")}
             onChange={(e) => SetPost(e.target.value)}
             value={post}
           />
@@ -136,7 +138,7 @@ function TweetBox() {
         <div className="flex justify-between items-end p-4 w-full">
           <div className="flex">
             <label className="cursor-pointer" htmlFor="image">
-              {isloading ? <p>Uploading image</p> : <p>{imgurl ? "Image Uploaded" : <ImgIco />}</p>}
+              {isloading ? <p>{t('tweetBox.uploading')}</p> : <p>{imgurl ? "Image Uploaded" : <ImgIco />}</p>}
             </label>
             <input
               type="file"
@@ -149,7 +151,7 @@ function TweetBox() {
             type="submit"
             className="font-bold bg-[rgba(65,156,241,1)] text-white p-1 px-6 rounded-full"
           >
-            Tweet
+             {t('tweetBox.tweetButton')}
           </button>
         </div>
       </form>

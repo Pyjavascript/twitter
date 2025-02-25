@@ -58,7 +58,7 @@ function Editprofile({ user, loggedInUser, open, Setopen }) {
   return (
     <>
       <div
-        className={`h-screen w-screen bg-slate-400 bg-opacity-50 flex justify-center items-center fixed left-0 top-0 z-10 sm:p-2 ${
+        className={`h-screen w-screen bg-slate-400 bg-opacity-50 flex justify-center items-center fixed left-0 top-0 z-20 sm:p-2 ${
           open ? "block" : "hidden"
         }`}
       >

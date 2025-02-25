@@ -4,11 +4,22 @@ import {Signup,Premium,Login,Home,Feed,Explore,NotificationComponent,Message,Lis
 import './App.css'
 import { StateProvider } from "./context/StateContext";
 import { UserAuthContextProvider } from "./context/userauth";
+import { useTranslation } from "react-i18next";
+import LanguageSelection from "./components/LanguageSelection";
 
 
 function App() {
+  const { t } = useTranslation();
+  const {part1,part2} = t("description",{
+    channel:"mani"
+  });
+  // console.log(description);
+  
   return (
     <>
+    <LanguageSelection/>
+    {/* <h1>{t("greeting")}</h1> */}
+
     <UserAuthContextProvider>
       <StateProvider>
       <Routes>

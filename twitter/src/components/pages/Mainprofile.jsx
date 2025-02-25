@@ -5,7 +5,8 @@ import Posts from "../Home/DataHome/Posts";
 import Arrowback from "../icons/Arrowback";
 import axios from "axios";
 import useLoggedinuser from "../../hooks/useLoggedinuser";
-
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 function Mainprofile({ user }) {
   const navigate = useNavigate();
   const [isloading, Setisloading] = useState(true);
@@ -14,6 +15,7 @@ function Mainprofile({ user }) {
   const [post, Setpost] = useState([]);
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [coords, setCoords] = useState({ lat: 0, lng: 0 });
 
   useEffect(() => {
     if (user?.email) {
@@ -37,11 +39,11 @@ function Mainprofile({ user }) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-
-          const nominatimURL = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+          setCoords({ lat: latitude, lng: longitude });
 
           try {
+            // Reverse Geocoding (Get City, State, Country)
+            const nominatimURL = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
             const locationRes = await axios.get(nominatimURL);
             const address = locationRes.data.address;
             const city = address.city || address.town || address.village || "Unknown City";
@@ -50,8 +52,8 @@ function Mainprofile({ user }) {
 
             setLocation({ city, state, country });
 
+            // Fetch Weather Data
             const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=ba51aa1d379a2d6159a84593c8d81ec9`;
-
             const weatherRes = await axios.get(weatherURL);
             setWeather(weatherRes.data);
           } catch (error) {
@@ -125,6 +127,17 @@ function Mainprofile({ user }) {
               <p>{`${weather.weather[0].description}, ${weather.main.temp}°C`}</p>
             </div>
           )}
+        </div>
+        <div className="z-10">
+        {/* Map Display */}
+        {coords.lat !== 0 && (
+          <MapContainer center={[coords.lat, coords.lng]} zoom={13} style={{ height: "300px", width: "100%" }}>
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <Marker position={[coords.lat, coords.lng]}>
+              <Popup>Your Location</Popup>
+            </Marker>
+          </MapContainer>
+        )}
         </div>
       </div>
 

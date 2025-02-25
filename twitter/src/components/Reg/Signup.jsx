@@ -2,14 +2,15 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useUserAuth } from "../../context/userauth";
 import { updateProfile } from "firebase/auth"; 
+import { useTranslation } from "react-i18next";
 function signup() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [User, SetUser] = useState("");
   const [name, SetName] = useState("");
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
   const [error, SetError] = useState("");
-  // const { signin } = useUserAuth();
   const { googleSignIn,createWithEmail } = useUserAuth();
 
   const handleSubmit = async (e) => {
@@ -17,10 +18,8 @@ function signup() {
     try {
       const userCredential = await createWithEmail(email, password);
       const user = userCredential.user;
-  
-      // ✅ Set displayName for Email/Password sign-up
       await updateProfile(user, {
-        displayName: User, // Username from input field
+        displayName: User,
       });
   
       console.log("User signed up:", user);
@@ -95,13 +94,13 @@ function signup() {
           <div className="text-[#419CF1] text-5xl">
             <ion-icon name="logo-twitter"></ion-icon>
           </div>
-          <h1 className="text-4xl font-bold">Happening now</h1>
+          <h1 className="text-4xl font-bold">{t('signup.title')}</h1>
           <div className="flex flex-col gap-5">
-            <h2 className="text-2xl font-medium">Join twitter today</h2>
+            <h2 className="text-2xl font-medium">{t('signup.subtitle')}</h2>
             <form action="" className="flex flex-col gap-3 w-2/4">
               <input
                 type="text"
-                placeholder="@username"
+                placeholder={`@${t('signup.username')}`}
                 className="bg-slate-200 placeholder:text-slate-500 p-3 w-64 py-2 rounded-lg focus:outline outline-[#419CF1] outline-2"
                 value={User}
                 onChange={(e) => SetUser(e.target.value)}
@@ -109,7 +108,7 @@ function signup() {
               />
               <input
                 type="text"
-                placeholder="Enter Full Name"
+                placeholder={t('signup.fullname')}
                 className="bg-slate-200 placeholder:text-slate-500 p-3 w-64 py-2 rounded-lg focus:outline outline-[#419CF1] outline-2"
                 value={name}
                 onChange={(e) => SetName(e.target.value)}
@@ -117,7 +116,7 @@ function signup() {
               />
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder={t('signup.email')}
                 className="bg-slate-200 placeholder:text-slate-500 p-3 w-64 py-2 rounded-lg focus:outline outline-[#419CF1] outline-2"
                 value={email}
                 onChange={(e) => SetEmail(e.target.value)}
@@ -125,7 +124,7 @@ function signup() {
               />
               <input
                 type="password"
-                placeholder="Enter Password"
+                placeholder={t('signup.password')}
                 className="bg-slate-200 placeholder:text-slate-500 p-3 w-64 py-2 rounded-lg focus:outline outline-[#419CF1] outline-2"
                 value={password}
                 onChange={(e) => SetPassword(e.target.value)}
@@ -135,7 +134,7 @@ function signup() {
                 className="bg-[#419CF1] text-white w-64 py-2 rounded-lg hover:bg-opacity-80 transition-colors flex justify-center items-center"
                 onClick={handleSubmit}
               >
-                Sign Up
+                {t('signup.signup')}
               </button>
               <div className="md:w-[80%] w-64 flex justify-center items-center ">
                 <hr className="w-[50%]" />
@@ -150,20 +149,20 @@ function signup() {
                     alt=""
                     className="h-[100%]"
                   />
-                  <p>Sign in with Google</p>
+                  <p>{t('signup.google')}</p>
                 </div>
                 <p className="md:pl-8 text-sm w-60 flex justify-center items-center">
-                  Already have an account
+                {t('signup.haveaccount')}
                   <Link to="/login" className="text-[#419CF1]">
-                    Log in
+                  {t('signup.login')}
                   </Link>
                 </p>
-                <p className="md:pl-8 text-sm w-60 flex justify-center items-center">
+                {/* <p className="md:pl-8 text-sm w-60 flex justify-center items-center">
                   Create Using Phone
                   <Link to="/PhoneAuth" className="text-[#419CF1]">
                     Here
                   </Link>
-                </p>
+                </p> */}
               </div>
             </form>
           </div>

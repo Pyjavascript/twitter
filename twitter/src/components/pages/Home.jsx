@@ -25,12 +25,12 @@ function Home() {
 
   return (
 
-    <div className="flex flex-col sm:flex-row p-0 md:px-28 overflow-hidden h-screen">
+    <div className="flex flex-col sm:flex-row p-0 md:px-28  overflow-y-scroll h-screen">
       {/* <NotificationComponent/> */}
-      <div>
+      <div className='pb-2'>
         <Sidebar handlelogout={handlelout} user={user} />
       </div>
-      <div className="flex-1 lg:w-3/5 overflow-y-auto">
+      <div className="outlet flex-1 lg:w-3/5 overflow-y-scroll border-r-[1px]">
         <Outlet />
       </div>
       <div className="hidden md:hidden lg:block w-1/3">

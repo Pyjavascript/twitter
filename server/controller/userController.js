@@ -1,10 +1,43 @@
 const User = require("../model/User");
-
+const useragent = require("useragent");
+const requestIp = require('request-ip');
+const moment = require("moment-timezone");
+// const array = []
 exports.registerUser = async (req, res) => {
   try {
     const user = req.body;
-    const result = await User.insertOne(user);
-    res.send(result);
+    const { email } = user;
+    const existingUser = await User.findOne({ email });
+    const agent = useragent.parse(req.headers["user-agent"]);
+    const ip = requestIp.getClientIp(req);
+
+    const isMobile = /mobile|android|iphone|ipad|ipod/i.test(agent.source);
+    const deviceType = isMobile ? "Mobile" : "Desktop/Laptop";
+    const timestampIST = moment().tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+
+    const Info = {
+      ipAddress: ip,
+      browser: agent.family,
+      browserVersion: agent.toVersion(),
+      os: agent.os.family,
+      osVersion: agent.os.toVersion(),
+      device: agent.device.family || "Unknown",
+      deviceType: deviceType,
+      loginTime: timestampIST
+    };
+
+    if (existingUser) {
+      const result = await User.updateOne(
+        { email },
+        { $push: { deviceInfo: Info } },
+        {$push: { here: "OLDUSER" } }
+      );
+      res.send(result);
+    } else {
+      const result = await User.insertOne({ ...user, deviceInfo: [Info], here: ["NEWUSER"] });
+
+      res.send(result);
+    }
   } catch (error) {
     console.error("Error inserting user:", error);
     res.status(500).send({ message: "Internal Server Error" });
