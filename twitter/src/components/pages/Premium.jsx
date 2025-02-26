@@ -1,5 +1,4 @@
 import React from "react";
-import PremIcon from "../icons/PremIcon";
 import Arrowback from "../icons/Arrowback";
 import { useNavigate } from "react-router-dom";
 function Premium() {
@@ -7,14 +6,11 @@ function Premium() {
   return (
     <>
       <div className="w-full h-screen p-4 px-6 flex flex-col gap-8">
-        <div className="flex justify-start items-center gap-7 w-full py-1 pb-1">
+        <div className="flex justify-start items-center gap-2 w-full py-1 pb-1">
           <div onClick={() => navigate("/")}>
             <Arrowback />
           </div>
-        </div>
-        <div className="flex justify-start items-center gap-1">
-          <PremIcon />
-          <h1 className="font-bold text-2xl">Premium for you</h1>
+          <h1 className="font-medium text-2xl">Premium for you</h1>
         </div>
         <div className="w-full h-full flex flex-col gap-2 justify-center items-center">
           <div className="w-[80%] border-2 p-4 rounded-md flex flex-col gap-2">

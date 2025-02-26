@@ -7,7 +7,9 @@ import axios from "axios";
 import useLoggedinuser from "../../hooks/useLoggedinuser";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { useTranslation } from "react-i18next";
 function Mainprofile({ user }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [isloading, Setisloading] = useState(true);
   const [loggedInUser] = useLoggedinuser();
@@ -86,8 +88,8 @@ function Mainprofile({ user }) {
           <Arrowback />
         </div>
         <div className="flex flex-col justify-start items-start">
-          <h1 className="font-bold text-lg">Coderado</h1>
-          <p className="text-slate-500 text-xs -mt-1">{post.length} posts</p>
+          <h1 className="font-bold text-lg">{user.displayName}</h1>
+          <p className="text-slate-500 text-xs -mt-1">{post.length}{t('profile.post')}</p>
         </div>
       </div>
 
@@ -100,7 +102,7 @@ function Mainprofile({ user }) {
             <img className="h-full w-full" src={user.photoURL || "https://wallpapers.com/images/hd/tanjiro-pictures-d95tyjljedvuafjf.jpg"} />
           </div>
           <p onClick={() => Setopen((prev) => !prev)} className="font-bold text-lg border p-1 px-3 rounded-full hover:bg-slate-100 cursor-pointer">
-            Edit profile
+            {t('profile.edit')}
           </p>
         </div>
       </div>
@@ -108,17 +110,17 @@ function Mainprofile({ user }) {
       <div className="w-full flex flex-col gap-3 px-4">
         <div className="flex flex-col justify-start items-start">
           <h1 className="font-bold text-2xl">{user.displayName}</h1>
-          <p className="text-sm text-slate-500">@{user.displayName}</p>
+          <p className="text-sm text-slate-500">{user.email}</p>
         </div>
-        <p>{loggedInUser[0]?.bio || "bio.."}</p>
+        <p>{loggedInUser[0]?.bio || t('profile.bio')}</p>
 
         <div className="text-slate-400 flex flex-col md:flex-row md:gap-2">
           <button onClick={handleObtainLocation} className="bg-blue-500 text-white px-3 py-1 rounded-lg">
-            Obtain Location
+            {t('profile.location')}
           </button>
           <div className="flex items-center text-slate-500">
             <ion-icon name="location-outline"></ion-icon>
-            <p>{location ? `${location.city}, ${location.state}, ${location.country}` : "Location"}</p>
+            <p>{location ? `${location.city}, ${location.state}, ${location.country}` : t('profile.loc')}</p>
           </div>
 
           {weather && (
@@ -134,7 +136,7 @@ function Mainprofile({ user }) {
           <MapContainer center={[coords.lat, coords.lng]} zoom={13} style={{ height: "300px", width: "100%" }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={[coords.lat, coords.lng]}>
-              <Popup>Your Location</Popup>
+              <Popup>{t('profile.loc')}</Popup>
             </Marker>
           </MapContainer>
         )}
@@ -142,7 +144,7 @@ function Mainprofile({ user }) {
       </div>
 
       <div className="mt-5 px-2">
-        <h1 className="font-bold text-2xl px-2">Tweets</h1>
+        <h1 className="font-bold text-2xl px-2">{t('profile.tweets')}</h1>
         {post.map((p) => (
           <Posts key={p.id} p={p} />
         ))}

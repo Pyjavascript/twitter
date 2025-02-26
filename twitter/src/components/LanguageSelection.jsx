@@ -33,12 +33,12 @@ function LanguageSelection() {
         }
     ]
   return (
-    <div className="p-2 flex gap-3">
+    <div className="p-2 flex gap-2 border-b">
     {languages.map((lang, index) => (
         <p 
             key={lang.code} 
             onClick={() => changeLanguage(lang.code)} 
-            className={`text-sm relative ${lang.code === i18n.language ? "border-b-2 border-sky-500" : ""} cursor-pointer `}
+            className={`text-xs md:text-sm relative ${lang.code === i18n.language ? "border-b-2 border-sky-500" : ""} cursor-pointer `}
         >
             {lang.lang}
         </p>

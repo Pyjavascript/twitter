@@ -34,7 +34,7 @@ i18n
             notifications: "Notifications",
             messages: "Messages",
             bookmarks: "Bookmarks",
-            lists: "Lists",
+            lists: "Public Space",
             premium: "Premium",
             profile: "Profile",
             more: "More",
@@ -51,6 +51,27 @@ i18n
             retweet: "Retweet",
             share: "Share",
           },
+          profile:{
+            edit:"Edit profile",
+            bio:"bio",
+            location:"Obtain Location",
+            loc:"Location",
+            tweets:"Tweets",
+            post: "Posts",  
+          },
+          more:{
+            history:"Login History",
+            date:"Date",
+            device:"Device",
+            browser:"Browser",
+            os:"OS",
+            ip:"IP Address"
+          },
+          sm:{
+            premium:"Try Premium",
+            you:"For you",
+            following:"Following"
+          }
         },
       },
       fr: {
@@ -74,7 +95,7 @@ i18n
             notifications: "Notifications",
             messages: "Messages",
             bookmarks: "Signets",
-            lists: "Listes",
+            lists: "Espace public",
             premium: "Premium",
             profile: "Profil",
             more: "Plus",
@@ -91,6 +112,30 @@ i18n
             retweet: "Retweeter",
             share: "Partager",
           },
+          profile: {  
+            edit: "Modifier le profil"  ,
+            bio: "Bio"  ,
+            location: "Obtenir l'emplacement"  ,
+            loc: "Emplacement"  ,
+            tweets: "Tweets"  ,
+            post: "Publications",  
+          },
+          more: {  
+            history: "Historique de connexion",  
+            date: "Date",  
+            device: "Appareil",  
+            browser: "Navigateur",  
+            os: "Système d'exploitation",  
+            ip: "Adresse IP"  
+          },
+          sm: {
+            premium: "Essayer Premium",
+            you: "Pour vous",
+            following: "Abonnements"
+          },
+          
+          
+          
         },
       },
       hi: {
@@ -114,7 +159,7 @@ i18n
             notifications: "सूचनाएँ",
             messages: "संदेश",
             bookmarks: "बुकमार्क",
-            lists: "सूचियाँ",
+            lists: "सार्वजनिक स्थान",
             premium: "प्रीमियम",
             profile: "प्रोफ़ाइल",
             more: "अधिक",
@@ -131,6 +176,30 @@ i18n
             retweet: "रीट्वीट",
             share: "साझा करें",
           },
+          profile: {  
+            edit: "प्रोफ़ाइल संपादित करें"  ,
+            bio: "बायो"  ,
+            location: "स्थान प्राप्त करें"  ,
+            loc: "स्थान"  ,
+            tweets: "ट्वीट्स"  ,
+            post:"पोस्ट्स"
+          },
+          more: {  
+            history: "लॉगिन इतिहास",  
+            date: "तारीख",  
+            device: "डिवाइस",  
+            browser: "ब्राउज़र",  
+            os: "ऑपरेटिंग सिस्टम",  
+            ip: "आईपी पता"  
+          },
+          sm: {
+            premium: "प्रीमियम आज़माएं",
+            you: "आपके लिए",
+            following: "अनुसरण कर रहे हैं"
+          },
+          
+          
+          
         },
       },
       zh: {
@@ -154,7 +223,7 @@ i18n
             notifications: "通知",
             messages: "消息",
             bookmarks: "书签",
-            lists: "列表",
+            lists:  "公共空间",
             premium: "高级",
             profile: "个人资料",
             more: "更多",
@@ -171,6 +240,29 @@ i18n
             retweet: "转推",
             share: "分享",
           },
+          profile: {  
+            edit: "编辑个人资料"  ,
+            bio: "简介"  ,
+            location: "获取位置"  ,
+            loc: "位置"  ,
+            tweets: "推文"  ,
+            post:"帖子"
+          },
+          more: {  
+            history: "登录历史",  
+            date: "日期",  
+            device: "设备",  
+            browser: "浏览器",  
+            os: "操作系统",  
+            ip: "IP 地址"  
+          },
+          sm: {
+            premium: "尝试高级版",
+            you: "为你推荐",
+            following: "关注"
+          },
+          
+          
         },
       },
       es: {
@@ -193,7 +285,7 @@ i18n
             notifications: "Notificaciones",
             messages: "Mensajes",
             bookmarks: "Marcadores",
-            lists: "Listas",
+            lists: "Espacio público",
             premium: "Premium",
             profile: "Perfil",
             more: "Más",
@@ -210,6 +302,28 @@ i18n
             retweet: "Retwittear",
             share: "Compartir",
           },
+          profile: {  
+            edit: "Editar perfil"  ,
+            bio: "Biografía"  ,
+            location: "Obtener ubicación"  ,
+            loc: "Ubicación"  ,
+            tweets: "Tweets"  ,
+            post:"Publicaciones"
+          },
+          more: {  
+            history: "Historial de inicio de sesión",  
+            date: "Fecha",  
+            device: "Dispositivo",  
+            browser: "Navegador",  
+            os: "Sistema operativo",  
+            ip: "Dirección IP"  
+          },
+          sm: {
+            premium: "Probar Premium",
+            you: "Para ti",
+            following: "Siguiendo"
+          },
+          
         },
       },
       pt: {
@@ -232,7 +346,7 @@ i18n
             notifications: "Notificações",
             messages: "Mensagens",
             bookmarks: "Favoritos",
-            lists: "Listas",
+            lists: "Espaço público",
             premium: "Premium",
             profile: "Perfil",
             more: "Mais",
@@ -249,6 +363,29 @@ i18n
             retweet: "Retweetar",
             share: "Compartilhar",
           },
+          profile: {  
+            edit: "Editar perfil"  ,
+            bio: "Biografia"  ,
+            location: "Obter localização"  ,
+            loc: "Localização"  ,
+            tweets: "Tweets"  ,
+            post:"Publicações" 
+          },
+          more: {  
+            history: "Histórico de login",  
+            date: "Data",  
+            device: "Dispositivo",  
+            browser: "Navegador",  
+            os: "Sistema operacional",  
+            ip: "Endereço IP"  
+          },
+          sm: {
+            premium: "Experimente o Premium",
+            you: "Para você",
+            following: "Seguindo"
+          }
+          
+          
         },
       },
     },

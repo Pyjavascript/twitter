@@ -4,7 +4,9 @@ import TweetBox from "../Home/DataHome/TweetBox";
 import { useUserAuth } from "../../context/userauth";
 import Create from "../icons/Create";
 import { StateContext } from "../../context/StateContext";
+import { useTranslation } from "react-i18next";
 function Feed() {
+  const { t } = useTranslation();
   const { setShowNavbar } = useContext(StateContext);
   const [isOpen, SetisOpen] = useState(false);
   const [post, SetPost] = useState([]);
@@ -45,7 +47,7 @@ function Feed() {
             <ion-icon name="logo-twitter"></ion-icon>
           </div>
           <p className="font-bold h-7 p-3 py-4 rounded-full  flex justify-center items-center bg-black text-white">
-            Try Premium
+            {t('sm.premium')}
           </p>
         </div>
       </div>
@@ -57,7 +59,7 @@ function Feed() {
             } font-semibold py-3 w-1/2 h-full flex flex-col justify-center items-center hover:bg-slate-100 cursor-pointer`}
             onClick={() => Setsec("you")}
           >
-            <p>For you</p>
+            <p>{t('sm.you')}</p>
             <div
               className={`${
                 sec == "you" ? "block" : "hidden"
@@ -70,7 +72,7 @@ function Feed() {
             } font-semibold py-3 w-1/2 h-full flex justify-center items-center hover:bg-slate-100 cursor-pointer`}
             onClick={() => Setsec("follow")}
           >
-            <p>Following</p>
+            <p>{t('sm.following')}</p>
             <div
               className={`${
                 sec == "follow" ? "block" : "hidden"

@@ -2,7 +2,9 @@ import React, { useEffect,useState } from "react";
 import { useUserAuth } from "../../context/userauth";
 import { useNavigate } from "react-router-dom";
 import Arrowback from "../icons/Arrowback";
+import { useTranslation } from "react-i18next";
 function More() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [deviceInfo, SetdeviceInfo] = useState([]);
   const { user } = useUserAuth();
@@ -22,21 +24,21 @@ function More() {
   
   return (
     <div className="h-full w-full p-4">
-       <div className="flex justify-start items-center gap-7 w-full py-1 pb-1">
+       <div className="flex justify-start items-center gap-2 w-full py-1 pb-1">
         <div onClick={() => navigate("/")}>
           <Arrowback />
         </div>
+      <h1 className="text-2xl font-medium">{t('more.history')}</h1>
       </div>
-      <h1 className="text-2xl font-bold">Login History</h1>
       <div className="overflow-scroll md:w-full">
       <table className="w-full mt-4 border border-gray-300 shadow-lg rounded-lg overflow-hidden">
   <thead className="bg-gray-200 text-gray-700">
     <tr>
-      <th className="p-3 text-left">Date</th>
-      <th className="p-3 text-left">Device</th>
-      <th className="p-3 text-left">Browser</th>
-      <th className="p-3 text-left">OS</th>
-      <th className="p-3 text-left">IP Address</th>
+      <th className="p-3 text-left">{t('more.date')}</th>
+      <th className="p-3 text-left">{t('more.device')}</th>
+      <th className="p-3 text-left">{t('more.browser')}</th>
+      <th className="p-3 text-left">{t('more.os')}</th>
+      <th className="p-3 text-left">{t('more.ip')}</th>
     </tr>
   </thead>
   <tbody>
