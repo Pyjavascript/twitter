@@ -38,6 +38,8 @@ function signup() {
           name: name,
           email: email,
           password: password,
+          following:[],
+          count:0,
         }),
       })
       .then((res) => res.json())
@@ -70,6 +72,9 @@ function signup() {
         body: JSON.stringify({
           displayName: user.displayName, // Already set by Google
           email: user.email,
+          following:[],
+          count:0,
+          
         }),
       })
       .then((res) => res.json())

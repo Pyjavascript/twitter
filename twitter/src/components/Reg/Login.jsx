@@ -6,7 +6,7 @@ function Login() {
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
   const [error, SetError] = useState("");
-  const { googlesignIn, login } = useUserAuth();
+  const { googleSignIn, login } = useUserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,13 +21,15 @@ function Login() {
   const handleGoogle = async (e) => {
     e.preventDefault();
     try {
-      await googlesignIn();
+     await googleSignIn();
       navigate("/");
     } catch (err) {
       console.log(err.message);
     }
   };
-
+  const forget = () => {
+    navigate('/forgetpassword')
+  }
   return (
     <div className="h-screen w-screen flex">
       <div className="h-screen hidden md:flex md:w-1/2 bg-sky-500">
@@ -58,6 +60,7 @@ function Login() {
                 onChange={(e) => SetPassword(e.target.value)}
                 autoComplete="new-password"
               />
+              <p className="text-sky-400 cursor-pointer" onClick={forget}>Forgot Password</p>
               <button
                 className="bg-[#419CF1] text-white w-64 py-2 rounded-lg hover:bg-opacity-80 transition-colors flex justify-center items-center"
                 onClick={handleSubmit}

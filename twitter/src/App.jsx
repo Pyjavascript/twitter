@@ -6,13 +6,10 @@ import { StateProvider } from "./context/StateContext";
 import { UserAuthContextProvider } from "./context/userauth";
 import { useTranslation } from "react-i18next";
 import LanguageSelection from "./components/LanguageSelection";
-
+import Forget from "./components/Reg/Forget";
 
 function App() {
-  const { t } = useTranslation();
-  const {part1,part2} = t("description",{
-    channel:"mani"
-  });
+  const { t } = useTranslation();  
   // console.log(description);
   
   return (
@@ -27,6 +24,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/phoneauth" element={<PhoneAuth />} />
+        <Route path="/forgetpassword" element={<Forget />}/>
         <Route path="/" element={<Home />}>
         <Route index element={<Feed />}/>
         </Route>

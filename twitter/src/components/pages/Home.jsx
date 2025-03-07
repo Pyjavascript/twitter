@@ -30,11 +30,11 @@ function Home() {
       <div className='pb-2'>
         <Sidebar handlelogout={handlelout} user={user} />
       </div>
-      <div className="outlet flex-1 lg:w-3/5 overflow-y-scroll border-r-[1px]">
+      <div className="outlet flex-1 lg:w-4/5 overflow-y-scroll border-r-[1px]">
         <Outlet />
       </div>
       <div className="hidden md:hidden lg:block w-1/3">
-        {/* <Widget /> */}
+        <Widget />
       </div>
     </div>
   )

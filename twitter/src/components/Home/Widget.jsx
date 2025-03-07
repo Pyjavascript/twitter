@@ -1,61 +1,57 @@
-import React, { useState, useEffect } from "react";
-import { BiSearch } from "react-icons/bi";
+import React, { useState } from "react";
 
 function Widget() {
-  const [searchQuery, setSearchQuery] = useState("Technology"); // Default search topic
+  const [query, setQuery] = useState("");
+  const [tweets, setTweets] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // Load Twitter widget script dynamically
-    const script = document.createElement("script");
-    script.src = "https://platform.twitter.com/widgets.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Reinitialize Twitter widget after searchQuery updates
-    if (window.twttr && window.twttr.widgets) {
-      window.twttr.widgets.load();
+  const fetchTweets = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:3000/api/searchTweets?q=${query}`);
+      const data = await response.json();
+      setTweets(data.tweets);
+    } catch (error) {
+      console.error("Error fetching tweets:", error);
     }
-  }, [searchQuery]); // Runs when searchQuery changes
+    setLoading(false);
+  };
 
   return (
-    <div className="h-screen pt-2 p-3 flex flex-col gap-5 overflow-hidden border-l-[1px]">
-      {/* Search Bar */}
-      <div className="sticky top-0 bg-white">
-        <div className="flex items-center space-x-2 bg-gray-100 p-3 rounded-full">
-          <BiSearch className="h-5 w-5 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search Twitter"
-            className="bg-transparent flex-1 outline-none"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+    <div className="chatbot-container p-4 h-screen overflow-scroll">
+      <h2 className="text-xl font-bold">Ask the Chatbot!</h2>
+      <div className="flex gap-2 my-2">
+        <input
+          type="text"
+          placeholder="Ask about cricket, tech, etc."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="border p-2 flex-1"
+        />
+        <button
+          onClick={fetchTweets}
+          className="bg-blue-500 text-white p-2 rounded"
+        >
+          Search
+        </button>
       </div>
 
-      {/* Twitter Search Feed */}
-      <div className="flex flex-col gap-1 pl-2 overflow-hidden">
-        <h2 className="font-extrabold text-2xl">
-          Search Results for "{searchQuery}"
-        </h2>
+      {loading && <p>Loading tweets...</p>}
 
-        <div className="overflow-hidden">
-          <a
-            key={searchQuery} // Forces re-render when searchQuery changes
-            className="twitter-timeline"
-            data-height="510"
-            data-width="340"
-            href={`https://twitter.com/search?q=${encodeURIComponent(searchQuery)}&f=live`}
-          >
-            Loading tweets...
-          </a>
-        </div>
+      <div className="tweets-list mt-4 space-y-4">
+        {tweets.map((tweet, index) => (
+          <div key={index} className="border p-3 rounded">
+            <p className="text-sm text-gray-700">{tweet.text}</p>
+            <a
+              href={`https://twitter.com/${tweet.user}/status/${tweet.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              View on Twitter
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   );

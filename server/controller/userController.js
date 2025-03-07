@@ -2,7 +2,7 @@ const User = require("../model/User");
 const useragent = require("useragent");
 const requestIp = require('request-ip');
 const moment = require("moment-timezone");
-// const array = []
+
 exports.registerUser = async (req, res) => {
   try {
     const user = req.body;
@@ -35,7 +35,7 @@ exports.registerUser = async (req, res) => {
       res.send(result);
     } else {
       const result = await User.insertOne({ ...user, deviceInfo: [Info], here: ["NEWUSER"] });
-
+      localStorage.setItem("Following", []);
       res.send(result);
     }
   } catch (error) {
@@ -76,6 +76,24 @@ exports.updateUser = async (req, res) => {
     res.send(result);
   } catch (error) {
     console.error("Error updating user:", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+};
+
+exports.updateFollow = async (req, res) => {
+  try {
+    const { email, count, following } = req.body;
+    const result = await User.updateOne(
+      { email },
+      {
+        $set: { count: count },
+        $push: { following: { $each: following } },
+      },
+      { new: true }
+    );
+    res.send(result);
+  } catch (e) {
+    console.log("Error in Following user: ", e);
     res.status(500).send({ message: "Internal Server Error" });
   }
 };

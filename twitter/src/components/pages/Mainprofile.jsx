@@ -9,6 +9,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useTranslation } from "react-i18next";
 function Mainprofile({ user }) {
+  
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [isloading, Setisloading] = useState(true);
@@ -18,7 +19,9 @@ function Mainprofile({ user }) {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
   const [coords, setCoords] = useState({ lat: 0, lng: 0 });
-
+  const [notificationsEnabled, setNotificationsEnabled] = useState(
+    localStorage.getItem("notifications") === "enabled"
+  );
   useEffect(() => {
     if (user?.email) {
       fetch(`https://twitter-jfq3.onrender.com/userpost?email=${user.email}`)
@@ -78,7 +81,21 @@ function Mainprofile({ user }) {
   if (!user) {
     return <div>User not found</div>;
   }
-
+  const toggleNotifications = () => {
+    if (notificationsEnabled) {
+      localStorage.setItem("notifications", "disabled");
+      setNotificationsEnabled(false);
+    } else {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          localStorage.setItem("notifications", "enabled");
+          setNotificationsEnabled(true);
+        } else {
+          alert("Please allow notifications to enable this feature.");
+        }
+      });
+    }
+  };
   return (
     <div className="h-screen overflow-hidden overflow-y-auto">
       <Editprofile open={open} Setopen={Setopen} user={user} loggedInUser={loggedInUser} />
@@ -89,7 +106,7 @@ function Mainprofile({ user }) {
         </div>
         <div className="flex flex-col justify-start items-start">
           <h1 className="font-bold text-lg">{user.displayName}</h1>
-          <p className="text-slate-500 text-xs -mt-1">{post.length}{t('profile.post')}</p>
+          <p className="text-slate-500 text-xs -mt-1">{post.length} {t('profile.post')}</p>
         </div>
       </div>
 
@@ -113,7 +130,16 @@ function Mainprofile({ user }) {
           <p className="text-sm text-slate-500">{user.email}</p>
         </div>
         <p>{loggedInUser[0]?.bio || t('profile.bio')}</p>
-
+        <div>
+        <label>
+        <input
+          type="checkbox"
+          checked={notificationsEnabled}
+          onChange={toggleNotifications}
+        />
+        Enable Notifications for Cricket & Science Tweets
+      </label>
+        </div>
         <div className="text-slate-400 flex flex-col md:flex-row md:gap-2">
           <button onClick={handleObtainLocation} className="bg-blue-500 text-white px-3 py-1 rounded-lg">
             {t('profile.location')}

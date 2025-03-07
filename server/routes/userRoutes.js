@@ -7,5 +7,6 @@ router.post("/register", registerUser);
 router.get("/loggedinuser", getLoggedInUser);
 router.get("/user", getAllUsers);
 router.patch("/userupdate/:email", updateUser);
+// router.post('/updatefollow',updateFollow)
 
 module.exports = router;
