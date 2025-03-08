@@ -24,7 +24,7 @@ function Mainprofile({ user }) {
   );
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://twitter-jfq3.onrender.com/userpost?email=${user.email}`)
+      fetch(`http://localhost:3000/api/post?user=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           Setpost(data);
