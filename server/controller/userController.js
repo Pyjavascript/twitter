@@ -35,7 +35,7 @@ exports.registerUser = async (req, res) => {
       res.send(result);
     } else {
       const result = await User.insertOne({ ...user, deviceInfo: [Info], here: ["NEWUSER"] });
-      localStorage.setItem("Following", []);
+      // localStorage.setItem("Following", []);
       res.send(result);
     }
   } catch (error) {

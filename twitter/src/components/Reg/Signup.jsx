@@ -40,6 +40,7 @@ function signup() {
           password: password,
           following:[],
           count:0,
+          
         }),
       })
       .then((res) => res.json())

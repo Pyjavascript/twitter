@@ -7,15 +7,24 @@ function Widget() {
 
   const fetchTweets = async () => {
     setLoading(true);
+    setTweets([]); // Clear old results
     try {
-      const response = await fetch(`http://localhost:3000/api/searchTweets?q=${query}`);
+      const response = await fetch(`http://localhost:3000/searchTweets?q=${query}`);
       const data = await response.json();
-      setTweets(data.tweets);
+  
+      if (data.error) {
+        console.error("Error:", data.error);
+        setTweets([]); // No results found
+      } else {
+        setTweets(data.tweets || []);
+      }
     } catch (error) {
       console.error("Error fetching tweets:", error);
+      setTweets([]); // Prevent stale data
     }
     setLoading(false);
   };
+  
 
   return (
     <div className="chatbot-container p-4 h-screen overflow-scroll">
@@ -38,21 +47,20 @@ function Widget() {
 
       {loading && <p>Loading tweets...</p>}
 
-      <div className="tweets-list mt-4 space-y-4">
-        {tweets.map((tweet, index) => (
-          <div key={index} className="border p-3 rounded">
-            <p className="text-sm text-gray-700">{tweet.text}</p>
-            <a
-              href={`https://twitter.com/${tweet.user}/status/${tweet.id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 underline"
-            >
-              View on Twitter
-            </a>
-          </div>
-        ))}
-      </div>
+      {tweets.map((tweet, index) => (
+  <div key={index} className="border p-3 rounded">
+    <p className="text-sm text-gray-700">{tweet.text}</p>
+    <a
+      href={`https://twitter.com/i/web/status/${tweet.id}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-blue-500 underline"
+    >
+      View on Twitter
+    </a>
+  </div>
+))}
+
     </div>
   );
 }

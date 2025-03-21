@@ -8,7 +8,7 @@ import Send from "./icons/Send";
 import Views from "./icons/Views";
 
 function Posts({ p }) {
-  const { name, username, post, profilephoto, photo, id } = p;
+  const { name, username, post, profilephoto, photo,audioUrl, id } = p;
   return (
     <div className="flex justify-start w-full cursor-pointer hover:bg-slate-50">
       <div className="p-2 px-2 flex justify-start gap-1 border-b-[1px]">
@@ -29,6 +29,12 @@ function Posts({ p }) {
           </div>
           <div className="w-4/4 md:w-full flex flex-col gap-2">
             <p>{post}</p>
+            {audioUrl && (
+              <audio controls>
+                <source src={audioUrl} type="audio/wav" />
+                Your browser does not support the audio element.
+              </audio>
+            )}
             <img src={photo} className="w-full rounded-xl object-contain" />
           </div>
           <div className="w-full flex justify-between p-0 md:p-2">
