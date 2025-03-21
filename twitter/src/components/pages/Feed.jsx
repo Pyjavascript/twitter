@@ -17,7 +17,7 @@ function Feed() {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://https://twitter-jfq3.onrender.com/api/post?user=${user.email}`)
+      fetch(`https://twitter-jfq3.onrender.com/api/post?user=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           SetPost(data);

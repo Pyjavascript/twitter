@@ -9,7 +9,7 @@ function Widget() {
     setLoading(true);
     setTweets([]); // Clear old results
     try {
-      const response = await fetch(`http://https://twitter-jfq3.onrender.com/searchTweets?q=${query}`);
+      const response = await fetch(`https://twitter-jfq3.onrender.com/searchTweets?q=${query}`);
       const data = await response.json();
   
       if (data.error) {

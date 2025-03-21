@@ -28,7 +28,7 @@ function signup() {
       await user.reload(); // ✅ Refresh user state
   
       // ✅ Send updated user data to backend
-      fetch("http://https://twitter-jfq3.onrender.com/api/register", {
+      fetch("https://twitter-jfq3.onrender.com/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +65,7 @@ function signup() {
       console.log("Google User Data:", user);
   
       // ✅ Google already provides displayName, send it to backend
-      fetch("http://https://twitter-jfq3.onrender.com/api/register", {
+      fetch("https://twitter-jfq3.onrender.com/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

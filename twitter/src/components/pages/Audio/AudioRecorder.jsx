@@ -79,7 +79,7 @@ const AudioRecorder = ({ email,isOpen }) => {
       return;
     }
 
-    const response = await fetch("http://https://twitter-jfq3.onrender.com/send-otp", {
+    const response = await fetch("https://twitter-jfq3.onrender.com/send-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -93,7 +93,7 @@ const AudioRecorder = ({ email,isOpen }) => {
 
   // ✅ Verify OTP
   const verifyOtp = async () => {
-    const response = await fetch("http://https://twitter-jfq3.onrender.com/verify-otp", {
+    const response = await fetch("https://twitter-jfq3.onrender.com/verify-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, otp }),
@@ -137,7 +137,7 @@ const AudioRecorder = ({ email,isOpen }) => {
       if (isUploading) return;
       setIsUploading(true);
 
-      const response = await fetch("http://https://twitter-jfq3.onrender.com/upload-audio", {
+      const response = await fetch("https://twitter-jfq3.onrender.com/upload-audio", {
         method: "POST",
         body: formData,
       });
@@ -152,7 +152,7 @@ const AudioRecorder = ({ email,isOpen }) => {
         let tempUsername = "";
         let profileImage = "";
         if (user?.providerData[0]?.providerId === "password") {
-          const res = await fetch(`http://https://twitter-jfq3.onrender.com/api/loggedinuser?email=${email}`);
+          const res = await fetch(`https://twitter-jfq3.onrender.com/api/loggedinuser?email=${email}`);
           const data = await res.json();
           tempName = data[0].displayName;
           tempUsername = data[0].username;
@@ -183,7 +183,7 @@ const AudioRecorder = ({ email,isOpen }) => {
           //   showNotification(post);
           // }
   
-          fetch("http://https://twitter-jfq3.onrender.com/api/post", {
+          fetch("https://twitter-jfq3.onrender.com/api/post", {
             method: "POST",
             headers: {
               "content-type": "application/json",
