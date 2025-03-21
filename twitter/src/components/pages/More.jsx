@@ -10,7 +10,7 @@ function More() {
   const { user } = useUserAuth();
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/api/loggedinuser?email=${user.email}`)
+      fetch(`http://https://twitter-jfq3.onrender.com/api/loggedinuser?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           SetdeviceInfo(data[0].deviceInfo);

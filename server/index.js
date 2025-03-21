@@ -102,7 +102,7 @@ app.post("/upload-audio", upload.single("audio"), async (req, res) => {
     return res.status(400).json({ error: "No file uploaded" });
   }
 
-  const fileUrl = `http://localhost:3000/uploads/${req.file.filename}`;
+  const fileUrl = `http://https://twitter-jfq3.onrender.com/uploads/${req.file.filename}`;
 
   // Store in database (optional)
   try {

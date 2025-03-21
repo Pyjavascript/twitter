@@ -12,7 +12,7 @@ function Lists() {
 
   // Fetch users list
   useEffect(() => {
-    fetch(`http://localhost:3000/api/user`)
+    fetch(`http://https://twitter-jfq3.onrender.com/api/user`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -40,7 +40,7 @@ function Lists() {
       const updatedFollowing = [...following, userId];
       setFollowing(updatedFollowing);
       
-      fetch("http://localhost:3000/api/updatefollow", {
+      fetch("http://https://twitter-jfq3.onrender.com/api/updatefollow", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

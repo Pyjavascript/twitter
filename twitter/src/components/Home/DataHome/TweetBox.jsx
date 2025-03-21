@@ -115,7 +115,7 @@ function TweetBox() {
         let tempUsername = "";
   
         if (user?.providerData[0]?.providerId === "password") {
-          const res = await fetch(`http://localhost:3000/api/loggedinuser?email=${email}`);
+          const res = await fetch(`http://https://twitter-jfq3.onrender.com/api/loggedinuser?email=${email}`);
           const data = await res.json();
           tempName = data[0].displayName;
           tempUsername = data[0].username;
@@ -145,7 +145,7 @@ function TweetBox() {
             showNotification(post);
           }
   
-          fetch("http://localhost:3000/api/post", {
+          fetch("http://https://twitter-jfq3.onrender.com/api/post", {
             method: "POST",
             headers: {
               "content-type": "application/json",
