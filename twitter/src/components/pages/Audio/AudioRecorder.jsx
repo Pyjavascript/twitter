@@ -115,7 +115,7 @@ const AudioRecorder = ({ email,isOpen }) => {
       return;
     }
 
-    if (canUploadAudio()) { //!canUploadAudio()
+    if (!canUploadAudio()) {
       alert("You can only upload audio between 2:00 PM - 7:00 PM IST.");
       return;
     }
