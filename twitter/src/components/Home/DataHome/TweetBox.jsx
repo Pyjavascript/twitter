@@ -104,10 +104,10 @@ function TweetBox() {
     
     postCount = localStorage.getItem("postCount");
     postCount = Number(postCount);
-    if(!postCount){
+    if(postCount){ //!postCount
       alert("Your post limit has been reached for today. Please try again tomorrow.");
     }else{
-      if(!canPost){
+      if(canPost){ //!canPost
         alert("You can only post between 10:00 AM - 10:30 AM IST");
       }
       else{
